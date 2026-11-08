@@ -1,0 +1,155 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authenticated user profile in the Antigravity learning systems runtime.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Profile creation timestamp."
+        }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "CustomSkill": {
+      "title": "CustomSkill",
+      "description": "A user-authored pedagogical agent skill or invariant rule.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the skill."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Name of the pedagogical skill."
+        },
+        "domain": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80,
+          "description": "Cognitive domain of the skill."
+        },
+        "evidenceBase": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Empirical scientific research citation."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Operational description of the rule."
+        },
+        "ruleCode": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Declarative YAML / AST rule snippet."
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Firebase UID of author."
+        },
+        "authorEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Email of author."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp."
+        }
+      },
+      "required": ["name", "domain", "description", "ruleCode", "authorId", "createdAt"]
+    },
+    "EvaluationLog": {
+      "title": "EvaluationLog",
+      "description": "A recorded sandbox run evaluating a pedagogical rule against a prompt.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Evaluation run identifier."
+        },
+        "skillId": {
+          "type": "string",
+          "description": "Target skill identifier."
+        },
+        "skillName": {
+          "type": "string",
+          "description": "Target skill name."
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "Prompt evaluated in sandbox."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["guarded", "unconstrained"],
+          "description": "Execution mode."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the AST invariant gate passed."
+        },
+        "latencyMs": {
+          "type": "number",
+          "description": "Sandbox evaluation latency in milliseconds."
+        },
+        "authorId": {
+          "type": "string",
+          "description": "Firebase UID of evaluator."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Evaluation timestamp."
+        }
+      },
+      "required": ["skillId", "prompt", "mode", "passed", "authorId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User profile collection."
+    },
+    "/custom_skills/{skillId}": {
+      "schema": {
+        "$ref": "#/entities/CustomSkill"
+      },
+      "description": "Community authored pedagogical agent skills."
+    },
+    "/evaluations/{evalId}": {
+      "schema": {
+        "$ref": "#/entities/EvaluationLog"
+      },
+      "description": "Recorded test runs and benchmark evaluations."
+    }
+  }
+}

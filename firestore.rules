@@ -1,0 +1,89 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened Helper Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // 1. Users Collection
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId)
+        && incoming().uid == userId
+        && incoming().email is string
+        && incoming().email.size() <= 150
+        && incoming().keys().hasAll(['uid', 'email', 'createdAt'])
+        && incoming().keys().hasOnly(['uid', 'email', 'displayName', 'createdAt']);
+      allow update: if isOwner(userId)
+        && incoming().uid == existing().uid
+        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName']);
+      allow delete: if false;
+    }
+
+    // 2. Custom Skills Collection (Authored pedagogical agent skills)
+    match /custom_skills/{skillId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn()
+        && isValidId(skillId)
+        && incoming().authorId == request.auth.uid
+        && incoming().name is string && incoming().name.size() >= 2 && incoming().name.size() <= 100
+        && incoming().domain is string && incoming().domain.size() >= 2 && incoming().domain.size() <= 80
+        && incoming().description is string && incoming().description.size() <= 500
+        && incoming().ruleCode is string && incoming().ruleCode.size() <= 1000
+        && incoming().keys().hasAll(['name', 'domain', 'description', 'ruleCode', 'authorId', 'createdAt'])
+        && incoming().keys().hasOnly(['id', 'name', 'domain', 'evidenceBase', 'description', 'ruleCode', 'authorId', 'authorEmail', 'createdAt', 'updatedAt']);
+      allow update: if isSignedIn()
+        && isValidId(skillId)
+        && existing().authorId == request.auth.uid
+        && incoming().authorId == existing().authorId
+        && incoming().name is string && incoming().name.size() >= 2 && incoming().name.size() <= 100
+        && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'domain', 'evidenceBase', 'description', 'ruleCode', 'updatedAt']);
+      allow delete: if isSignedIn()
+        && isValidId(skillId)
+        && existing().authorId == request.auth.uid;
+    }
+
+    // 3. Evaluations Collection (Immutable sandbox benchmark logs)
+    match /evaluations/{evalId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn()
+        && isValidId(evalId)
+        && incoming().authorId == request.auth.uid
+        && incoming().skillId is string && incoming().skillId.size() <= 100
+        && incoming().prompt is string && incoming().prompt.size() <= 400
+        && (incoming().mode == 'guarded' || incoming().mode == 'unconstrained')
+        && incoming().passed is bool
+        && incoming().keys().hasAll(['skillId', 'prompt', 'mode', 'passed', 'authorId', 'createdAt'])
+        && incoming().keys().hasOnly(['id', 'skillId', 'skillName', 'prompt', 'mode', 'passed', 'latencyMs', 'frictionScore', 'authorId', 'createdAt']);
+      allow update: if false; // Immutable log
+      allow delete: if isSignedIn() && existing().authorId == request.auth.uid;
+    }
+  }
+}

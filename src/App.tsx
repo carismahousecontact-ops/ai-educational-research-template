@@ -9,6 +9,7 @@ import { ParticleBackground } from './components/ParticleBackground';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { LearningAgentCockpit } from './components/LearningAgentCockpit';
+import { FirebaseSkillsManager } from './components/FirebaseSkillsManager';
 import { ProjectsMatrix } from './components/ProjectsMatrix';
 import { JourneyRadar } from './components/JourneyRadar';
 import { InvitedTalksTerminal } from './components/InvitedTalksTerminal';
@@ -41,7 +42,7 @@ export default function App() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-[#08090b] text-[#f0f2f7] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
     >
-      {/* Three.js Interactive Particle Background Canvas (Exact feature provided by user) */}
+      {/* Three.js Interactive Particle Background Canvas */}
       <ParticleBackground />
 
       {/* Main UI Overlay (relative z-10) */}
@@ -66,6 +67,9 @@ export default function App() {
 
           {/* Antigravity Agent Cockpit for Education Agent Skills */}
           <LearningAgentCockpit lang={lang} />
+
+          {/* Live Cloud Firestore Skills Registry (Spark Free Tier) */}
+          <FirebaseSkillsManager lang={lang} />
 
           {/* Selected Work & Systems Matrix */}
           <ProjectsMatrix lang={lang} />
