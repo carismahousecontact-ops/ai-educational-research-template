@@ -52,12 +52,6 @@ export const Header: React.FC<HeaderProps> = ({
             {isAr ? 'محرك المهارات' : 'Agent Cockpit'}
           </a>
           <a
-            href="#journey"
-            className="hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-blue-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
-          >
-            {isAr ? 'المسار الميداني' : 'Field Trajectory'}
-          </a>
-          <a
             href="#talks"
             className="hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-blue-500 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
           >
