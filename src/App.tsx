@@ -11,7 +11,6 @@ import { Hero } from './components/Hero';
 import { LearningAgentCockpit } from './components/LearningAgentCockpit';
 import { FirebaseSkillsManager } from './components/FirebaseSkillsManager';
 import { ProjectsMatrix } from './components/ProjectsMatrix';
-import { JourneyRadar } from './components/JourneyRadar';
 import { InvitedTalksTerminal } from './components/InvitedTalksTerminal';
 import { WritingReader } from './components/WritingReader';
 import { Footer } from './components/Footer';
@@ -73,9 +72,6 @@ export default function App() {
 
           {/* Selected Work & Systems Matrix */}
           <ProjectsMatrix lang={lang} />
-
-          {/* Fieldwork & Implementation Trajectory (27 Regions) */}
-          <JourneyRadar lang={lang} />
 
           {/* Global Research & Policy Panels (UNESCO, Stanford, IIT) */}
           <InvitedTalksTerminal lang={lang} />
