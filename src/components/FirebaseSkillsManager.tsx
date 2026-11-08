@@ -6,13 +6,15 @@ import {
   db,
   testConnection,
   handleFirestoreError,
-  OperationType
+  getUserFriendlyErrorMessage,
+  OperationType,
+  ConnectionTestResult,
 } from '../lib/firebase';
 import {
   signInWithPopup,
   signOut,
   onAuthStateChanged,
-  User
+  User,
 } from 'firebase/auth';
 import {
   collection,
@@ -21,22 +23,16 @@ import {
   deleteDoc,
   onSnapshot,
   query,
-  orderBy,
   limit,
-  serverTimestamp
 } from 'firebase/firestore';
 import {
   Database,
-  Cloud,
-  ShieldCheck,
   LogIn,
   LogOut,
   Plus,
   Trash2,
   CheckCircle2,
-  Sparkles,
-  Terminal,
-  Server
+  AlertCircle,
 } from 'lucide-react';
 
 interface FirebaseManagerProps {
@@ -52,17 +48,23 @@ interface SavedSkill {
   ruleCode: string;
   authorId: string;
   authorEmail?: string;
-  createdAt?: any;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) => {
   const isAr = lang === 'ar';
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [isConnected, setIsConnected] = useState<boolean>(true);
+  const [connectionResult, setConnectionResult] = useState<ConnectionTestResult>({
+    state: 'connected',
+    message: 'Initializing Firestore connection...',
+    messageAr: 'جاري تهيئة الاتصال بقاعدة البيانات...',
+  });
   const [skills, setSkills] = useState<SavedSkill[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [formOpen, setFormOpen] = useState<boolean>(false);
-  const [notification, setNotification] = useState<string | null>(null);
+  const [notification, setNotification] = useState<{ message: string; isError?: boolean } | null>(null);
 
   // Form states
   const [skillName, setSkillName] = useState('');
@@ -79,9 +81,11 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
     return () => unsubscribe();
   }, []);
 
-  // Verify connection on boot
+  // Verify connection probe on boot (non-blocking)
   useEffect(() => {
-    testConnection().then((ok) => setIsConnected(ok));
+    testConnection().then((res) => {
+      setConnectionResult(res);
+    });
   }, []);
 
   // Real-time listener for custom skills in Firestore
@@ -91,47 +95,54 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
       q,
       (snapshot) => {
         const fetched: SavedSkill[] = [];
-        snapshot.forEach((doc) => {
-          fetched.push({ id: doc.id, ...(doc.data() as Omit<SavedSkill, 'id'>) });
+        snapshot.forEach((docSnap) => {
+          fetched.push({ id: docSnap.id, ...(docSnap.data() as Omit<SavedSkill, 'id'>) });
         });
         setSkills(fetched);
       },
       (error) => {
-        handleFirestoreError(error, OperationType.LIST, 'custom_skills');
+        const errInfo = handleFirestoreError(error, OperationType.LIST, 'custom_skills');
+        console.warn('[Firestore listener notice]:', errInfo.error);
       }
     );
 
     return () => unsubscribe();
   }, []);
 
+  const showNotice = (message: string, isError = false) => {
+    setNotification({ message, isError });
+    setTimeout(() => setNotification(null), 4000);
+  };
+
   const handleSignIn = async () => {
     try {
       await signInWithPopup(auth, googleAuthProvider);
-      showNotice(isAr ? 'تم تسجيل الدخول بنجاح' : 'Authenticated successfully');
+      showNotice(isAr ? 'تم تسجيل الدخول بنجاح مع Google' : 'Authenticated with Google successfully');
     } catch (err) {
       console.error('Sign-in error:', err);
-      showNotice(isAr ? 'تعذر إتمام تسجيل الدخول' : 'Sign-in cancelled or failed');
+      showNotice(
+        isAr ? 'تعذر إتمام تسجيل الدخول أو تم إلغاؤه' : 'Sign-in cancelled or failed',
+        true
+      );
     }
   };
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      showNotice(isAr ? 'تم تسجيل الخروج' : 'Signed out');
+      showNotice(isAr ? 'تم تسجيل الخروج بنجاح' : 'Signed out successfully');
     } catch (err) {
       console.error('Sign-out error:', err);
+      showNotice(isAr ? 'حدث خطأ أثناء تسجيل الخروج' : 'Error during sign out', true);
     }
-  };
-
-  const showNotice = (msg: string) => {
-    setNotification(msg);
-    setTimeout(() => setNotification(null), 3500);
   };
 
   const handleCreateSkill = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return; // Prevent duplicate concurrent commits
+
     if (!currentUser) {
-      showNotice(isAr ? 'يرجى تسجيل الدخول لحفظ المهارة' : 'Please sign in to save skills');
+      showNotice(isAr ? 'يرجى تسجيل الدخول بحساب Google أولاً لنشر المهارة' : 'Please sign in with Google to publish skills', true);
       return;
     }
     if (!skillName.trim() || !skillDescription.trim()) return;
@@ -156,26 +167,70 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
       setSkillName('');
       setSkillDescription('');
       setFormOpen(false);
-      showNotice(isAr ? 'تم حفظ المهارة في قاعدة بيانات Cloud Firestore بنجاح' : 'Skill saved to Cloud Firestore (Spark Free Plan)');
+      showNotice(isAr ? 'تم حفظ وتأكيد المهارة في Cloud Firestore بنجاح' : 'Skill verified and saved to Cloud Firestore (Spark Plan)');
     } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, `custom_skills/${newId}`);
+      const errInfo = handleFirestoreError(error, OperationType.CREATE, `custom_skills/${newId}`);
+      showNotice(getUserFriendlyErrorMessage(errInfo, lang), true);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDeleteSkill = async (skillId: string, authorId: string) => {
+    if (deletingId) return;
+
     if (!currentUser || currentUser.uid !== authorId) {
-      showNotice(isAr ? 'يمكن للمؤلف فقط حذف مهارته' : 'Only the author can delete this skill');
+      showNotice(isAr ? 'يحق فقط لصاحب المهارة حذفها' : 'Only the author can delete this skill', true);
       return;
     }
+
+    setDeletingId(skillId);
     try {
       await deleteDoc(doc(db, 'custom_skills', skillId));
       showNotice(isAr ? 'تم حذف المهارة من Firestore' : 'Skill removed from Firestore');
     } catch (error) {
-      handleFirestoreError(error, OperationType.DELETE, `custom_skills/${skillId}`);
+      const errInfo = handleFirestoreError(error, OperationType.DELETE, `custom_skills/${skillId}`);
+      showNotice(getUserFriendlyErrorMessage(errInfo, lang), true);
+    } finally {
+      setDeletingId(null);
     }
   };
+
+  // Determine badge styling based on probe result
+  const getStatusBadge = () => {
+    switch (connectionResult.state) {
+      case 'connected':
+        return {
+          dot: 'bg-emerald-400',
+          text: isAr ? 'قاعدة البيانات متصلة ومزامنة' : 'FIRESTORE ONLINE & SYNCED',
+          textColor: 'text-emerald-400',
+          bg: 'bg-emerald-500/10',
+        };
+      case 'permission-denied':
+        return {
+          dot: 'bg-blue-400',
+          text: isAr ? 'خادم متصل (قواعد Zero-Trust)' : 'REACHABLE (ZERO-TRUST ACTIVE)',
+          textColor: 'text-blue-400',
+          bg: 'bg-blue-500/10',
+        };
+      case 'offline':
+        return {
+          dot: 'bg-amber-400',
+          text: isAr ? 'العميل غير متصل (تخزين محلي)' : 'CLIENT OFFLINE (CACHED)',
+          textColor: 'text-amber-400',
+          bg: 'bg-amber-500/10',
+        };
+      default:
+        return {
+          dot: 'bg-zinc-400',
+          text: isAr ? 'تهيئة الاتصال' : 'CONFIG CHECK',
+          textColor: 'text-zinc-400',
+          bg: 'bg-zinc-500/10',
+        };
+    }
+  };
+
+  const statusBadge = getStatusBadge();
 
   return (
     <section id="firebase-registry" className="py-20 md:py-28 border-b border-white/8 bg-[#090b10] relative overflow-hidden">
@@ -184,16 +239,20 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0f121a] border border-white/10 mb-12 text-xs font-mono">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
-              <span className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-emerald-400' : 'bg-amber-400'} animate-pulse`} />
+              <span className={`w-2.5 h-2.5 rounded-full ${statusBadge.dot} animate-pulse`} />
               <span className="text-white font-medium">FIRESTORE CLOUD DATABASE</span>
             </div>
             <span className="text-white/30">|</span>
+            <span className={`${statusBadge.textColor} font-semibold ${statusBadge.bg} px-2 py-0.5 rounded`}>
+              {statusBadge.text}
+            </span>
+            <span className="text-white/30 hidden sm:inline">|</span>
             <span className="text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">
               Firebase Spark Plan (100% Free Tier)
             </span>
-            <span className="text-white/30 hidden sm:inline">|</span>
-            <span className="text-white/50 hidden sm:inline truncate max-w-xs">
-              Region: europe-west2 · DB: ai-studio-antigravitylearn
+            <span className="text-white/30 hidden md:inline">|</span>
+            <span className="text-white/50 hidden md:inline truncate max-w-xs">
+              europe-west2 · ai-studio-antigravitylearn
             </span>
           </div>
 
@@ -254,9 +313,19 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
 
         {/* Notification Toast */}
         {notification && (
-          <div className="mb-6 p-3 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-mono flex items-center gap-2 animate-fade-in">
-            <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
-            <span>{notification}</span>
+          <div
+            className={`mb-6 p-3 rounded-xl border text-xs font-mono flex items-center gap-2 animate-fade-in ${
+              notification.isError
+                ? 'bg-red-500/10 border-red-500/30 text-red-300'
+                : 'bg-blue-500/10 border-blue-500/30 text-blue-300'
+            }`}
+          >
+            {notification.isError ? (
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+            ) : (
+              <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" />
+            )}
+            <span>{notification.message}</span>
           </div>
         )}
 
@@ -345,7 +414,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
                 disabled={loading}
                 className="px-5 py-2 text-xs font-mono uppercase tracking-[0.1em] text-white bg-blue-600 hover:bg-blue-500 rounded-full transition-colors disabled:opacity-50"
               >
-                {loading ? (isAr ? 'جاري الحفظ...' : 'Persisting...') : isAr ? 'حفظ في Firestore' : 'Commit to Firestore'}
+                {loading ? (isAr ? 'جاري التحقق والحفظ...' : 'Validating & Persisting...') : isAr ? 'حفظ في Firestore' : 'Commit to Firestore'}
               </button>
             </div>
           </form>
@@ -394,7 +463,8 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
                   {currentUser && currentUser.uid === skill.authorId && (
                     <button
                       onClick={() => handleDeleteSkill(skill.id, skill.authorId)}
-                      className="p-1 hover:text-red-400 transition-colors"
+                      disabled={deletingId === skill.id}
+                      className="p-1 hover:text-red-400 transition-colors disabled:opacity-50"
                       title={isAr ? 'حذف من Firestore' : 'Delete from Firestore'}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
