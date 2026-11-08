@@ -83,7 +83,7 @@ export function getUserFriendlyErrorMessage(errInfo: FirestoreErrorInfo, lang: '
     : 'A database error occurred while processing your request.';
 }
 
-export type ConnectionState = 'connected' | 'permission-denied' | 'offline' | 'misconfigured';
+export type ConnectionState = 'checking' | 'connected' | 'permission-denied' | 'offline' | 'misconfigured';
 
 export interface ConnectionTestResult {
   state: ConnectionState;

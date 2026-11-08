@@ -57,7 +57,7 @@ service cloud.firestore {
         && incoming().description is string && incoming().description.size() <= 500
         && incoming().ruleCode is string && incoming().ruleCode.size() <= 1000
         && incoming().keys().hasAll(['name', 'domain', 'description', 'ruleCode', 'authorId', 'createdAt'])
-        && incoming().keys().hasOnly(['id', 'name', 'domain', 'evidenceBase', 'description', 'ruleCode', 'authorId', 'authorEmail', 'createdAt', 'updatedAt']);
+        && incoming().keys().hasOnly(['id', 'name', 'domain', 'evidenceBase', 'description', 'ruleCode', 'authorId', 'createdAt', 'updatedAt']);
       allow update: if isSignedIn()
         && isValidId(skillId)
         && existing().authorId == request.auth.uid

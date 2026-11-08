@@ -47,7 +47,6 @@ interface SavedSkill {
   description: string;
   ruleCode: string;
   authorId: string;
-  authorEmail?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -56,9 +55,9 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
   const isAr = lang === 'ar';
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [connectionResult, setConnectionResult] = useState<ConnectionTestResult>({
-    state: 'connected',
-    message: 'Initializing Firestore connection...',
-    messageAr: 'جاري تهيئة الاتصال بقاعدة البيانات...',
+    state: 'checking',
+    message: 'Checking Firestore connection...',
+    messageAr: 'جارٍ التحقق من اتصال قاعدة البيانات...',
   });
   const [skills, setSkills] = useState<SavedSkill[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -102,7 +101,24 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
       },
       (error) => {
         const errInfo = handleFirestoreError(error, OperationType.LIST, 'custom_skills');
+        const errorCode = typeof error === 'object' && error !== null && 'code' in error
+          ? String((error as { code?: unknown }).code)
+          : '';
+        const nextState = errorCode.includes('permission-denied')
+          ? 'permission-denied'
+          : errorCode.includes('unavailable') || errorCode.includes('network')
+            ? 'offline'
+            : 'misconfigured';
+        setConnectionResult({
+          state: nextState,
+          message: 'Firestore listener stopped after an error.',
+          messageAr: 'توقف مستمع Firestore بسبب خطأ.',
+        });
         console.warn('[Firestore listener notice]:', errInfo.error);
+        setNotification({
+          message: getUserFriendlyErrorMessage(errInfo, lang),
+          isError: true,
+        });
       }
     );
 
@@ -157,7 +173,6 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
       description: skillDescription.trim(),
       ruleCode: skillRuleCode.trim(),
       authorId: currentUser.uid,
-      authorEmail: currentUser.email || 'anonymous@antigravity.run',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -199,6 +214,13 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
   // Determine badge styling based on probe result
   const getStatusBadge = () => {
     switch (connectionResult.state) {
+      case 'checking':
+        return {
+          dot: 'bg-zinc-400',
+          text: isAr ? 'جارٍ التحقق من الاتصال' : 'CHECKING CONNECTION',
+          textColor: 'text-zinc-400',
+          bg: 'bg-zinc-500/10',
+        };
       case 'connected':
         return {
           dot: 'bg-emerald-400',
@@ -459,7 +481,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
                 </div>
 
                 <div className="pt-3 border-t border-white/8 flex items-center justify-between text-xs font-mono text-white/40">
-                  <span className="truncate max-w-[140px]">{skill.authorEmail}</span>
+                  <span className="truncate max-w-[140px]">{isAr ? 'مساهمة مجتمعية' : 'Community contribution'}</span>
                   {currentUser && currentUser.uid === skill.authorId && (
                     <button
                       onClick={() => handleDeleteSkill(skill.id, skill.authorId)}
