@@ -1,0 +1,6 @@
+{
+  "name": "Antigravity // Learning Systems & Agent Infrastructure",
+  "description": "An open architectural platform and runtime for evidence-grounded AI education agent skills, memory science systems, and topological knowledge graph modeling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

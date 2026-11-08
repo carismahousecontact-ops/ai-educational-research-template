@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --color-void: #08090b;
+  --color-surface: #0e1015;
+  --color-panel: #141720;
+  --color-panel-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #08090b;
+  color: #f0f2f7;
+}
+
+/* Antigravity Chromatic Iridescent Glow */
+.gravity-glow {
+  background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.08), rgba(236, 72, 153, 0.05), transparent 70%);
+}
+
+.chromatic-border {
+  position: relative;
+}
+.chromatic-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.4), rgba(219, 68, 55, 0.2), rgba(244, 180, 0, 0.2), rgba(15, 157, 88, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08090b;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
