@@ -56,9 +56,9 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
   const isAr = lang === 'ar';
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [connectionResult, setConnectionResult] = useState<ConnectionTestResult>({
-    state: 'connected',
-    message: 'Initializing Firestore connection...',
-    messageAr: 'جاري تهيئة الاتصال بقاعدة البيانات...',
+    state: 'misconfigured',
+    message: 'Checking Firestore connection...',
+    messageAr: 'جارٍ التحقق من اتصال قاعدة البيانات...',
   });
   const [skills, setSkills] = useState<SavedSkill[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -103,6 +103,10 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
       (error) => {
         const errInfo = handleFirestoreError(error, OperationType.LIST, 'custom_skills');
         console.warn('[Firestore listener notice]:', errInfo.error);
+        setNotification({
+          message: getUserFriendlyErrorMessage(errInfo, lang),
+          isError: true,
+        });
       }
     );
 
