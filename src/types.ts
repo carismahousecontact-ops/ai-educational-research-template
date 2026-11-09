@@ -42,20 +42,6 @@ export interface EducationSkill {
   invariantStatus: 'VERIFIED' | 'PASS' | 'GUARDED';
 }
 
-export interface JourneyChapter {
-  id: number;
-  period: string;
-  title: string;
-  titleAr: string;
-  location: string;
-  locationAr: string;
-  countriesCount: number;
-  focus: string;
-  focusAr: string;
-  highlights: string[];
-  highlightsAr: string[];
-}
-
 export interface InvitedTalk {
   id: string;
   convenor: string;
