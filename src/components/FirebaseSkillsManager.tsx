@@ -233,10 +233,10 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
   const statusBadge = getStatusBadge();
 
   return (
-    <section id="firebase-registry" className="py-20 md:py-28 border-b border-white/8 bg-[#090b10]/82 relative overflow-hidden">
+    <section id="firebase-registry" className="py-20 md:py-28 border-b border-white/8 bg-[#0b1018]/34 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Antigravity Telemetry Status Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0f121a] border border-white/10 mb-12 text-xs font-mono">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-[#172235]/72 border border-white/10 mb-12 text-xs font-mono">
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
               <span className={`w-2.5 h-2.5 rounded-full ${statusBadge.dot} animate-pulse`} />
@@ -331,7 +331,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
 
         {/* Skill Creation Form Modal/Card */}
         {formOpen && (
-          <form onSubmit={handleCreateSkill} className="mb-10 p-6 sm:p-8 rounded-[2rem] bg-[#0e111a] border border-blue-500/30 chromatic-border space-y-4">
+          <form onSubmit={handleCreateSkill} className="mb-10 p-6 sm:p-8 rounded-[2rem] bg-[#142033]/72 border border-blue-500/30 chromatic-border space-y-4">
             <h3 className="font-display text-xl font-bold text-white mb-4">
               {isAr ? 'نشر مهارة تربوية جديدة في Firestore' : 'Publish Pedagogical Rule to Firestore'}
             </h3>
@@ -423,7 +423,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
         {/* Live Skills Display Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.length === 0 ? (
-            <div className="col-span-full p-8 text-center rounded-[2rem] border border-white/8 bg-[#0d0f17] text-white/50 font-mono text-xs">
+            <div className="col-span-full p-8 text-center rounded-[2rem] border border-white/8 bg-[#111b2c]/68 text-white/50 font-mono text-xs">
               <Database className="w-6 h-6 mx-auto mb-2 text-white/30" />
               <p>{isAr ? 'لم تتم إضافة مهارات مخصصة بعد. انقر على "إضافة مهارة سحابية" لحفظ أول مهارة في Firestore.' : 'No custom skills authored yet. Click "Publish New Skill" to test live Firestore writes.'}</p>
             </div>
@@ -431,7 +431,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
             skills.map((skill) => (
               <div
                 key={skill.id}
-                className="rounded-[1.75rem] border border-white/10 bg-[#0e1017] p-6 flex flex-col justify-between shadow-[0_12px_40px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all"
+                className="rounded-[1.75rem] border border-white/10 bg-[#111827]/62 p-6 flex flex-col justify-between shadow-[0_12px_40px_rgba(0,0,0,0.5)] hover:border-white/20 transition-all"
               >
                 <div>
                   <div className="flex items-center justify-between text-[10px] font-mono text-white/40 mb-2">
