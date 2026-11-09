@@ -20,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isAr = lang === 'ar';
   const navItems = [
     { href: '#research-pathways', en: 'Explore', ar: 'استكشف' },
+    { href: '#wisdom-operations', en: 'Wisdom Room', ar: 'غرفة الحكمة' },
     { href: '#projects', en: 'Projects', ar: 'المشاريع' },
     { href: '#cockpit', en: 'Agent Skills', ar: 'مهارات الوكلاء' },
     { href: '#talks', en: 'Research', ar: 'الأبحاث' },
