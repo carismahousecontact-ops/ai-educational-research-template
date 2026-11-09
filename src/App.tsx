@@ -8,17 +8,19 @@ import { Language } from './types';
 import { ParticleBackground } from './components/ParticleBackground';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { ResearchPathways } from './components/ResearchPathways';
+import { WisdomOperations } from './components/WisdomOperations';
 import { LearningAgentCockpit } from './components/LearningAgentCockpit';
 import { FirebaseSkillsManager } from './components/FirebaseSkillsManager';
 import { ProjectsMatrix } from './components/ProjectsMatrix';
 import { InvitedTalksTerminal } from './components/InvitedTalksTerminal';
 import { WritingReader } from './components/WritingReader';
 import { Footer } from './components/Footer';
-import { ZeroGravityPlayground } from './components/ZeroGravityPlayground';
+import { ThinkChallenge } from './components/ThinkChallenge';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ar');
-  const [zeroGOpen, setZeroGOpen] = useState<boolean>(false);
+  const [thinkChallengeOpen, setThinkChallengeOpen] = useState<boolean>(false);
 
   useEffect(() => {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -31,63 +33,42 @@ export default function App() {
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div
+      id="top"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-[#08090b] text-[#f0f2f7] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
     >
-      {/* Original interactive particle background shared across the entire site */}
       <ParticleBackground />
-
-      {/* Main UI Overlay (relative z-10) */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Antigravity Header */}
         <Header
           lang={lang}
           onToggleLang={handleToggleLang}
           onOpenCockpit={() => scrollToSection('cockpit')}
-          zeroGActive={zeroGOpen}
-          onToggleZeroG={() => setZeroGOpen((prev) => !prev)}
+          onOpenThinkChallenge={() => setThinkChallengeOpen(true)}
         />
-
-        {/* Main Content */}
         <main className="flex-1">
-          {/* Hero Section */}
           <Hero
             lang={lang}
             onExploreCockpit={() => scrollToSection('cockpit')}
             onExploreProjects={() => scrollToSection('projects')}
           />
-
-          {/* Antigravity Agent Cockpit for Education Agent Skills */}
+          <ResearchPathways lang={lang} />
+          <WisdomOperations lang={lang} />
           <LearningAgentCockpit lang={lang} />
-
-          {/* Live Cloud Firestore Skills Registry (Spark Free Tier) */}
           <FirebaseSkillsManager lang={lang} />
-
-          {/* Selected Work & Systems Matrix */}
           <ProjectsMatrix lang={lang} />
-
-          {/* Global Research & Policy Panels (UNESCO, Stanford, IIT) */}
           <InvitedTalksTerminal lang={lang} />
-
-          {/* Architectural Monographs & Research Papers */}
           <WritingReader lang={lang} />
         </main>
-
-        {/* Footer */}
-        <Footer lang={lang} onOpenZeroG={() => setZeroGOpen(true)} />
-
-        {/* Zero Gravity Physics Easter Egg */}
-        <ZeroGravityPlayground
+        <Footer lang={lang} />
+        <ThinkChallenge
           lang={lang}
-          isOpen={zeroGOpen}
-          onClose={() => setZeroGOpen(false)}
+          isOpen={thinkChallengeOpen}
+          onClose={() => setThinkChallengeOpen(false)}
         />
       </div>
     </div>

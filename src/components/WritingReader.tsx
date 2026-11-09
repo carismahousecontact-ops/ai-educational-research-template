@@ -12,7 +12,7 @@ export const WritingReader: React.FC<WritingProps> = ({ lang }) => {
   const [selectedEssay, setSelectedEssay] = useState<EssayItem | null>(null);
 
   return (
-    <section id="writing" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e]/82">
+    <section id="writing" className="py-20 md:py-28 border-b border-white/8 bg-[#0b1018]/34">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="max-w-3xl mb-12">
@@ -37,7 +37,7 @@ export const WritingReader: React.FC<WritingProps> = ({ lang }) => {
             <div
               key={essay.id}
               onClick={() => setSelectedEssay(essay)}
-              className="group relative rounded-[2rem] border border-white/10 bg-[#0e1017] p-8 hover:border-white/25 hover:bg-[#121520] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between shadow-[0_16px_50px_rgba(0,0,0,0.5)]"
+              className="group relative rounded-[2rem] border border-white/10 bg-[#111827]/62 p-8 hover:border-white/25 hover:bg-[#1b2638]/78 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between shadow-[0_16px_50px_rgba(0,0,0,0.5)]"
             >
               <div>
                 <div className="flex items-center justify-between text-xs font-mono text-white/40 mb-3">

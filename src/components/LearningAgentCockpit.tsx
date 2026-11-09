@@ -24,7 +24,7 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
   };
 
   return (
-    <section id="cockpit" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e]/82 relative overflow-hidden">
+    <section id="cockpit" className="py-20 md:py-28 border-b border-white/8 bg-[#0b1018]/34 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -53,9 +53,9 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
         </div>
 
         {/* Antigravity IDE Workbench Card */}
-        <div className="rounded-[2rem] border border-white/12 bg-[#0d0f15] shadow-[0_24px_70px_rgba(0,0,0,0.7)] chromatic-border overflow-hidden">
+        <div className="rounded-[2rem] border border-white/12 bg-[#111827]/68 shadow-[0_24px_70px_rgba(0,0,0,0.7)] chromatic-border overflow-hidden">
           {/* Top IDE Toolbar */}
-          <div className="px-6 py-4 border-b border-white/8 bg-[#11141c] flex flex-wrap items-center justify-between gap-4">
+          <div className="px-6 py-4 border-b border-white/8 bg-[#1b2638]/72 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
@@ -96,7 +96,7 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
           {/* IDE Main Split Layout (3 Columns / Panes) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
             {/* Left Pane: Skill Directory (3.5 cols) */}
-            <div className="lg:col-span-4 p-5 border-b lg:border-b-0 lg:border-r border-white/8 bg-[#0b0c10] space-y-3">
+            <div className="lg:col-span-4 p-5 border-b lg:border-b-0 lg:border-r border-white/8 bg-[#101827]/72 space-y-3">
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/40 mb-3">
                 {isAr ? 'حزم مهارات علوم التعلم' : 'Curated Skill Rules (165)'}
               </p>
@@ -134,14 +134,14 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
             </div>
 
             {/* Center Pane: Live Simulation & Prompt Execution (5 cols) */}
-            <div className="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-white/8 bg-[#0d0f14] flex flex-col justify-between space-y-5">
+            <div className="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-white/8 bg-[#111a2a]/72 flex flex-col justify-between space-y-5">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono text-white/50">
                   <span>{isAr ? 'مدخلات الطالب / الفصل' : 'Student / Learner Prompt'}</span>
                   <span>Interactive Test</span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#14161f] border border-white/10 text-xs font-mono text-white/90">
+                <div className="p-3.5 rounded-xl bg-[#1b2638]/78 border border-white/10 text-xs font-mono text-white/90">
                   <p className="text-white/60 text-[10px] uppercase mb-1">PROMPT:</p>
                   <p className="italic">"{isAr ? activeSkill.testPromptAr : activeSkill.testPrompt}"</p>
                 </div>
@@ -209,7 +209,7 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
             </div>
 
             {/* Right Pane: AST Invariant Assertion & Terminal (3.5 cols) */}
-            <div className="lg:col-span-3 p-5 bg-[#090a0d] flex flex-col justify-between font-mono text-xs">
+            <div className="lg:col-span-3 p-5 bg-[#101827]/72 flex flex-col justify-between font-mono text-xs">
               <div className="space-y-4">
                 <p className="text-[11px] uppercase tracking-[0.14em] text-white/40">
                   {isAr ? 'فاحص ثوابت علوم التعلم' : 'Cognitive Load Calipers'}
