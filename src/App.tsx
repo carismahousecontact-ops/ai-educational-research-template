@@ -16,11 +16,11 @@ import { ProjectsMatrix } from './components/ProjectsMatrix';
 import { InvitedTalksTerminal } from './components/InvitedTalksTerminal';
 import { WritingReader } from './components/WritingReader';
 import { Footer } from './components/Footer';
-import { ZeroGravityPlayground } from './components/ZeroGravityPlayground';
+import { ThinkChallenge } from './components/ThinkChallenge';
 
 export default function App() {
   const [lang, setLang] = useState<Language>('ar');
-  const [zeroGOpen, setZeroGOpen] = useState<boolean>(false);
+  const [thinkChallengeOpen, setThinkChallengeOpen] = useState<boolean>(false);
 
   useEffect(() => {
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -48,8 +48,7 @@ export default function App() {
           lang={lang}
           onToggleLang={handleToggleLang}
           onOpenCockpit={() => scrollToSection('cockpit')}
-          zeroGActive={zeroGOpen}
-          onToggleZeroG={() => setZeroGOpen((prev) => !prev)}
+          onOpenThinkChallenge={() => setThinkChallengeOpen(true)}
         />
         <main className="flex-1">
           <Hero
@@ -65,11 +64,11 @@ export default function App() {
           <InvitedTalksTerminal lang={lang} />
           <WritingReader lang={lang} />
         </main>
-        <Footer lang={lang} onOpenZeroG={() => setZeroGOpen(true)} />
-        <ZeroGravityPlayground
+        <Footer lang={lang} />
+        <ThinkChallenge
           lang={lang}
-          isOpen={zeroGOpen}
-          onClose={() => setZeroGOpen(false)}
+          isOpen={thinkChallengeOpen}
+          onClose={() => setThinkChallengeOpen(false)}
         />
       </div>
     </div>
