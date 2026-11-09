@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
         >
           {/* Chromatic Gravity Well Dot */}
           <div className="relative w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-blue-500 via-rose-500 to-amber-400 p-[1px] shadow-[0_0_12px_rgba(59,130,246,0.6)]">
-            <div className="w-full h-full rounded-full bg-[#08090b]/82" />
+            <div className="w-full h-full rounded-full bg-[#08090b]" />
           </div>
           <span className="font-sans font-bold text-white tracking-tight">Antigravity</span>
           <span className="hidden sm:inline font-mono text-[11px] text-white/45 uppercase tracking-[0.14em] border-l border-white/10 pl-3">
