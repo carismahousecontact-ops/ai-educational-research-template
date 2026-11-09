@@ -9,6 +9,7 @@ import { ParticleBackground } from './components/ParticleBackground';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ResearchPathways } from './components/ResearchPathways';
+import { WisdomOperations } from './components/WisdomOperations';
 import { LearningAgentCockpit } from './components/LearningAgentCockpit';
 import { FirebaseSkillsManager } from './components/FirebaseSkillsManager';
 import { ProjectsMatrix } from './components/ProjectsMatrix';
@@ -57,6 +58,7 @@ export default function App() {
             onExploreProjects={() => scrollToSection('projects')}
           />
           <ResearchPathways lang={lang} />
+          <WisdomOperations lang={lang} />
           <LearningAgentCockpit lang={lang} />
           <FirebaseSkillsManager lang={lang} />
           <ProjectsMatrix lang={lang} />
