@@ -1,4 +1,4 @@
-import { ProjectItem, EducationSkill, JourneyChapter, InvitedTalk, EssayItem } from '../types';
+import { ProjectItem, EducationSkill, InvitedTalk, EssayItem } from '../types';
 
 export const garethProjects: ProjectItem[] = [
   {
@@ -206,85 +206,6 @@ export const garethSkills: EducationSkill[] = [
     agentResponse: 'On a scale from 1 to 5, how certain are you of line 3 where you divided across the inequality? What rule governed the sign change there?',
     agentResponseAr: 'على مقياس من 1 إلى 5، ما مدى يقينك من الخطوة الثالثة عند القسمة على طرفي المتباينة؟ وما القاعدة التي تحكم تغيير الإشارة؟',
     invariantStatus: 'VERIFIED'
-  }
-];
-
-export const journeyChapters: JourneyChapter[] = [
-  {
-    id: 1,
-    period: 'Phase I',
-    title: 'Foundational Pedagogy & Classroom Formative Loops',
-    titleAr: 'تأسيس الممارسة والتقييم التكويني الصفي',
-    location: 'Secondary Instructional Systems',
-    locationAr: 'نظم التعليم الثانوي',
-    countriesCount: 1,
-    focus: 'Classroom teaching methodologies, curriculum fundamentals, and formative assessment grounding.',
-    focusAr: 'استراتيجيات التدريس الصفي المباشر، أساسيات بناء المناهج، وتطوير أساليب التقييم التكويني.',
-    highlights: [
-      'Empirical testing of active retrieval schedules in secondary classrooms',
-      'Development of diagnostic distractor modeling for formative feedback'
-    ],
-    highlightsAr: [
-      'تطبيق تجريبي لجداول الاسترجاع النشط في فصول المدارس الثانوية',
-      'بناء نماذج خيارات تشخيصية ذكية لتحليل مسارات الفهم لدى الطلاب'
-    ]
-  },
-  {
-    id: 2,
-    period: 'Phase II',
-    title: 'Cross-Border Curriculum Reform & IB Alignment',
-    titleAr: 'تطوير المناهج عبر الحدود ومواءمة البكالوريا الدولية',
-    location: 'Multinational School Networks',
-    locationAr: 'شبكات المدارس الدولية متعددة الجنسيات',
-    countriesCount: 7,
-    focus: 'Departmental leadership, IB curriculum alignment, and multimodal learning systems.',
-    focusAr: 'إدارة الأقسام الأكاديمية، مواءمة مناهج البكالوريا الدولية (IB)، ونظم التعلم المتعدد.',
-    highlights: [
-      'Cross-disciplinary curriculum design across varied regional environments',
-      'Integration of educational technology architectures into daily instruction'
-    ],
-    highlightsAr: [
-      'تصميم مناهج متكاملة عبر تخصصات متعددة في بيئات تعليمية وثقافية متنوعة',
-      'دمج البنى التقنية التعليمية في خطط الدروس اليومية والتقييم'
-    ]
-  },
-  {
-    id: 3,
-    period: 'Phase III',
-    title: 'Whole-School Systems & Competency Credential Architecture',
-    titleAr: 'هندسة نظم المدارس الشاملة وشهادات الكفاءة',
-    location: 'Global School Design Consortia',
-    locationAr: 'اتحادات تصميم المدارس العالمية',
-    countriesCount: 12,
-    focus: 'Instructional coaching, competency-based diploma architecture, and systems innovation.',
-    focusAr: 'تدريب وتأهيل المعلمين، تصميم شهادات تخرج قائمة على الكفاءات، والابتكار المنظومي.',
-    highlights: [
-      'Core architecture of the Global Impact Credential framework',
-      'Standards-based competency evaluation across international consortia'
-    ],
-    highlightsAr: [
-      'صياغة البنية المعمارية الأساسية لإطار دبلوم الأثر العالمي',
-      'تقييم الكفاءات المرتكزة على المعايير عبر اتحادات تعليمية دولية'
-    ]
-  },
-  {
-    id: 4,
-    period: 'Phase IV',
-    title: 'Autonomous AI Education Agent Skills & Knowledge Graphs',
-    titleAr: 'مهارات وكلاء الذكاء الاصطناعي ورسوم المعرفة الطوبولوجية',
-    location: 'Open Architecture Runtime (Global Reach: 27 Regions)',
-    locationAr: 'بيئة تشغيل مفتوحة المصدر (انتشار في 27 إقليماً)',
-    countriesCount: 27,
-    focus: '165 Education Agent Skills, Hippo memory engine, learning science invariants for LLMs.',
-    focusAr: 'تطوير 165 مهارة لوكلاء الذكاء الاصطناعي، محرك هيبو، وثوابت علوم التعلم للنماذج.',
-    highlights: [
-      'Open-source Education Agent Skills specification for AI pedagogical judgment',
-      'Collaborative contributions to international educational policy frameworks'
-    ],
-    highlightsAr: [
-      'إطلاق مواصفة مهارات وكلاء التعليم لضبط الحكمة التربوية للذكاء الاصطناعي',
-      'مساهمات معمارية في أطر السياسات التعليمية الدولية'
-    ]
   }
 ];
 
