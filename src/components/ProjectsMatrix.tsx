@@ -18,7 +18,7 @@ export const ProjectsMatrix: React.FC<ProjectsProps> = ({ lang }) => {
       : garethProjects.filter((p) => p.category === filter);
 
   return (
-    <section id="projects" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]/82">
+    <section id="projects" className="py-20 md:py-28 border-b border-white/8 bg-[#0b1018]/34">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -39,7 +39,7 @@ export const ProjectsMatrix: React.FC<ProjectsProps> = ({ lang }) => {
           </div>
 
           {/* Antigravity Filter Tabs (Functional segmented buttons) */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#12141c] border border-white/10 rounded-full self-start md:self-auto text-xs font-mono">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#182235]/78 border border-white/10 rounded-full self-start md:self-auto text-xs font-mono">
             <button
               onClick={() => setFilter('all')}
               className={`px-3.5 py-1.5 rounded-full transition-all ${
@@ -82,7 +82,7 @@ export const ProjectsMatrix: React.FC<ProjectsProps> = ({ lang }) => {
               <div
                 key={project.id}
                 onClick={() => setActiveCaseStudy(project)}
-                className="group relative flex flex-col justify-between rounded-[1.75rem] border border-white/10 bg-[#0e1017] p-7 hover:border-white/25 hover:bg-[#121520] transition-all duration-300 cursor-pointer overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.5)]"
+                className="group relative flex flex-col justify-between rounded-[1.75rem] border border-white/10 bg-[#111827]/62 p-7 hover:border-white/25 hover:bg-[#1b2638]/78 transition-all duration-300 cursor-pointer overflow-hidden shadow-[0_16px_50px_rgba(0,0,0,0.5)]"
               >
                 <div>
                   {/* Top Metadata & Badge */}
