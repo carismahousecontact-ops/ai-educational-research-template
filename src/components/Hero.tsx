@@ -30,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onExploreCockpit, onExplorePro
               <BrainCircuit className="w-3.5 h-3.5" />
               {isAr ? 'غرفة عمليات الحكمة التربوية' : 'Educational Wisdom Operations'}
             </div>
-            <h1 className="font-display text-[38px] sm:text-[54px] lg:text-[66px] font-bold tracking-[-0.035em] leading-[1.13] text-white text-balance">
+            <h1 className="font-display text-[clamp(2.75rem,5.4vw,5rem)] font-bold tracking-[-0.03em] leading-[1.18] text-white text-balance">
               {isAr ? (
                 <>حين تقود <span className="logos-gold-text">الحكمةُ</span> الذكاء الاصطناعي، يصبح التفكير الإنساني هو الغاية.</>
               ) : (
