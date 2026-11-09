@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { BrainCircuit, Lightbulb, RotateCcw, X, ArrowLeft, ArrowRight, Eye, Sparkles } from 'lucide-react';
+import { BrainCircuit, Lightbulb, RotateCcw, X, ArrowLeft, ArrowRight, Eye } from 'lucide-react';
 
 interface ThinkChallengeProps {
   lang: Language;
