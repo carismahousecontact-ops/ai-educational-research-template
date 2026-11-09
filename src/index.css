@@ -16,8 +16,8 @@
   --logos-muted: rgba(245, 238, 230, .72);
   --logos-shadow: 0 24px 70px rgba(3, 13, 25, .34);
 
-  /* Typographic system: language-aware families and semantic color roles */
-  --logos-font-ar: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
+  /* Editorial typography: clear Arabic reading face, robust weights only. */
+  --logos-font-ar: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
   --logos-font-latin: "Inter", system-ui, -apple-system, sans-serif;
   --logos-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --logos-text-primary: #F5EEE6;
@@ -30,6 +30,25 @@
   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: var(--logos-font-mono);
+  --font-weight-thin: 400;
+  --font-weight-extralight: 400;
+  --font-weight-light: 400;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --text-xs: .875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.25rem;
+  --text-6xl: 4rem;
+  --text-7xl: 4.5rem;
   --color-void: var(--logos-navy-deep);
   --color-surface: var(--logos-navy);
   --color-panel: var(--logos-navy-surface);
@@ -38,27 +57,33 @@
 html { scroll-behavior: smooth; font-synthesis: none; text-rendering: optimizeLegibility; }
 body {
   font-family: var(--logos-font-latin);
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
   background-color: var(--logos-navy);
   color: var(--logos-text-primary);
 }
 html[lang="ar"] body {
   font-family: var(--logos-font-ar);
-  font-size: 16.5px;
-  line-height: 1.9;
+  font-size: 18px;
+  line-height: 1.95;
 }
 html[lang="ar"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
   font-family: var(--logos-font-ar);
   letter-spacing: 0;
+  font-weight: 700;
 }
 html[lang="en"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
   font-family: var(--logos-font-latin);
   letter-spacing: -0.025em;
+  font-weight: 700;
 }
 :where(p, li) { text-wrap: pretty; }
 :where(a, button, input, textarea, select) { font: inherit; }
 ::selection { background: rgba(39, 166, 210, .28); color: var(--logos-ivory); }
+
+/* Normalize any legacy light-weight utility to readable regular weight. */
+:where(.font-thin, .font-extralight, .font-light) { font-weight: 400 !important; }
 
 /* Reusable semantic typography roles for future sections and content modules. */
 .logos-text-primary { color: var(--logos-text-primary); }
@@ -66,11 +91,11 @@ html[lang="en"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
 .logos-text-muted { color: var(--logos-text-muted); }
 .logos-text-link { color: var(--logos-text-link); }
 .logos-text-accent { color: var(--logos-text-accent); }
-.logos-reading-copy { max-width: 72ch; font-size: 1rem; line-height: 1.85; }
-html[lang="ar"] .logos-reading-copy { max-width: 58ch; line-height: 1.95; }
-.logos-eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .12em; }
-html[lang="ar"] .logos-eyebrow { letter-spacing: 0; font-size: .8125rem; }
-.logos-caption { font-size: .8125rem; line-height: 1.6; color: var(--logos-text-muted); }
+.logos-reading-copy { max-width: 68ch; font-size: 1.125rem; line-height: 1.85; }
+html[lang="ar"] .logos-reading-copy { max-width: 58ch; font-size: 1.125rem; line-height: 2; }
+.logos-eyebrow { font-size: .875rem; font-weight: 600; letter-spacing: .12em; }
+html[lang="ar"] .logos-eyebrow { letter-spacing: 0; font-size: .9375rem; }
+.logos-caption { font-size: .875rem; font-weight: 500; line-height: 1.65; color: var(--logos-text-muted); }
 
 .logos-hero {
   background:
@@ -125,15 +150,17 @@ html[lang="ar"] .logos-eyebrow { letter-spacing: 0; font-size: .8125rem; }
 .logos-cyan { color: var(--logos-cyan); }
 .logos-gold { color: #D9B982; }
 
-/* Arabic display scale: slightly more leading, no Latin-style tracking. */
-html[lang="ar"] .logos-hero h1 { line-height: 1.28; }
-html[lang="ar"] .logos-hero p { line-height: 1.95; }
-html[lang="en"] .logos-hero h1 { line-height: 1.12; }
+/* Editorial Arabic display scale: generous leading and no letter-spacing. */
+html[lang="ar"] .logos-hero h1 { font-size: clamp(2.5rem, 5vw, 4.375rem); line-height: 1.35; }
+html[lang="ar"] .logos-hero p { font-size: 1.125rem; line-height: 2; }
+html[lang="en"] .logos-hero h1 { font-size: clamp(2.75rem, 5vw, 4.5rem); line-height: 1.12; }
 
 @media (max-width: 640px) {
-  body { font-size: 15.5px; }
-  html[lang="ar"] body { font-size: 16px; }
-  .logos-reading-copy { font-size: .96875rem; }
+  body { font-size: 17px; }
+  html[lang="ar"] body { font-size: 17.5px; }
+  .logos-reading-copy { font-size: 1.0625rem; }
+  html[lang="ar"] .logos-reading-copy { font-size: 1.0625rem; }
+  .logos-caption { font-size: .875rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .logos-emblem-orbit img { animation: logos-breathe 8s ease-in-out infinite; }
