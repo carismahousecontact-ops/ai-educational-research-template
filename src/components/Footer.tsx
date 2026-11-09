@@ -101,11 +101,6 @@ export const Footer: React.FC<FooterProps> = ({ lang, onOpenZeroG }) => {
                   IIT Gandhinagar · Cognitive Science Lab
                 </a>
               </li>
-              <li>
-                <a href="#journey" className="hover:text-white transition-colors">
-                  Fieldwork Trajectory (27 Regions)
-                </a>
-              </li>
             </ul>
           </div>
         </div>
