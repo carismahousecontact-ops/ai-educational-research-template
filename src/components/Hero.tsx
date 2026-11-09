@@ -37,16 +37,16 @@ export const Hero: React.FC<HeroProps> = ({
             <h1 className="font-display text-[42px] sm:text-[62px] lg:text-[74px] font-bold tracking-[-0.035em] leading-[1.02] text-white text-balance">
               {isAr ? (
                 <>
-                  تصميم العمارة القادمة <br />
+                  من البحث إلى التطبيق <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
-                    لنظم التعلم الذاتية.
+                    والابتكار التربوي المسؤول.
                   </span>
                 </>
               ) : (
                 <>
-                  Designing the next architecture for <br />
+                  Research, learning science, and <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
-                    autonomous learning systems.
+                    responsible AI innovation.
                   </span>
                 </>
               )}
@@ -54,8 +54,8 @@ export const Hero: React.FC<HeroProps> = ({
 
             <p className="mt-6 text-base sm:text-lg leading-relaxed text-white/65 max-w-2xl font-normal">
               {isAr
-                ? 'بيئة برمجية مفتوحة المصدر ومنظومة تشغيل مصممة لإكساب وكلاء الذكاء الاصطناعي حكمة تربوية مستندة إلى علوم الإدراك — لتحفيز التفكير الإنساني المستقل ومنع التلقين والتسريب السطحي للإجابات.'
-                : 'An open architectural ecosystem and runtime designed to constrain AI models with empirical cognitive science—enforcing Socratic scaffolding, spaced retrieval, and topological knowledge graph navigation.'}
+                ? 'منصة بحثية وتطبيقية تستكشف تقاطع علوم التعلم والبحث التربوي والذكاء الاصطناعي، وتحول الأدلة والأفكار إلى مشاريع ومهارات وتجارب تعليمية أكثر فاعلية ومسؤولية.'
+                : 'A research and applied innovation platform connecting learning science, educational research, and AI through projects, reusable skills, and evidence-informed learning experiences.'}
             </p>
 
             {/* Antigravity Primary CTAs */}
@@ -65,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="group flex items-center gap-2.5 px-6 py-3.5 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] whitespace-nowrap"
               >
                 <Terminal className="w-4 h-4 text-blue-600" />
-                <span>{isAr ? 'تجربة محاكي المهارات' : 'Test Agent Skills Cockpit'}</span>
+                <span>{isAr ? 'استكشف مهارات الوكلاء' : 'Explore agent skills'}</span>
                 <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
               </button>
 
@@ -74,27 +74,27 @@ export const Hero: React.FC<HeroProps> = ({
                 className="flex items-center gap-2 px-5 py-3.5 text-sm font-mono uppercase tracking-[0.08em] text-white/80 hover:text-white bg-[#14161f] border border-white/12 hover:border-white/25 rounded-full transition-colors whitespace-nowrap"
               >
                 <BookOpen className="w-4 h-4 text-purple-400" />
-                <span>{isAr ? 'استعراض مصفوفة الأنظمة' : 'Explore Systems Matrix'}</span>
+                <span>{isAr ? 'استكشف المشاريع' : 'Explore projects'}</span>
               </button>
             </div>
 
-            {/* Telemetry Strip below hero (Objective platform metrics) */}
+            {/* Platform pillars — descriptive, not vanity metrics */}
             <div className="mt-10 pt-6 border-t border-white/8 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
               <div>
-                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'قواعد المهارات' : 'Open Skills'}</p>
-                <p className="text-white font-semibold text-sm mt-0.5">165 Invariant Rules</p>
+                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'المرجعية' : 'Foundation'}</p>
+                <p className="text-white font-semibold text-sm mt-0.5">{isAr ? 'علوم التعلم' : 'Learning science'}</p>
               </div>
               <div>
-                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'المجالات المعرفية' : 'Cognitive Domains'}</p>
-                <p className="text-white font-semibold text-sm mt-0.5">20 Domains</p>
+                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'الممارسة' : 'Practice'}</p>
+                <p className="text-white font-semibold text-sm mt-0.5">{isAr ? 'مشاريع ومختبرات' : 'Projects & labs'}</p>
               </div>
               <div>
-                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'فحص الثوابت' : 'Safety Gates'}</p>
-                <p className="text-white font-semibold text-sm mt-0.5">Zero-Trust AST Diff</p>
+                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'القدرات' : 'Capabilities'}</p>
+                <p className="text-white font-semibold text-sm mt-0.5">{isAr ? 'مهارات ووكلاء' : 'Skills & agents'}</p>
               </div>
               <div>
-                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'التوافق المعماري' : 'Interoperability'}</p>
-                <p className="text-blue-400 font-semibold text-sm mt-0.5">Gemini · Claude · SDK</p>
+                <p className="text-white/40 uppercase tracking-[0.1em]">{isAr ? 'المساءلة' : 'Quality'}</p>
+                <p className="text-blue-400 font-semibold text-sm mt-0.5">{isAr ? 'تقييم قائم على الأدلة' : 'Evidence-led evaluation'}</p>
               </div>
             </div>
           </div>
