@@ -27,6 +27,8 @@ const challenges = [
     ],
     reflection: 'صمّم مهمة قصيرة تكشف انتقال المتعلم من تكرار الإجابة إلى توظيف الفكرة.',
     reflectionEn: 'Design a short task that reveals whether the learner can move from repeating an answer to using the underlying idea.',
+    answer: 'لا تكفي صحة الإجابة لإثبات حدوث التعلم. الدليل الأقوى هو أن يستطيع المتعلم شرح الفكرة بلغته، وتبريرها، ونقلها إلى موقف جديد، وإنجاز مهمة مشابهة دون اعتماد على الأداة. لذلك ينبغي أن يقيس التقويم الفهم والتطبيق لا مجرد تطابق الناتج.',
+    answerEn: 'A correct answer alone does not prove learning. Stronger evidence is the learner’s ability to explain the idea in their own words, justify it, transfer it to a new situation, and complete a similar task without the tool. Assessment should therefore examine understanding and application, not just whether the output is correct.',
   },
   {
     id: 'bias',
@@ -46,6 +48,8 @@ const challenges = [
     ],
     reflection: 'اكتب معيارين للتحقق من ادعاء قبل استخدامه في قرار تربوي.',
     reflectionEn: 'Write two criteria for checking a claim before using it in an educational decision.',
+    answer: 'لا ينبغي قبول النتيجة لمجرد أن صياغتها مقنعة. يجب فحص موثوقية المصدر وحداثته ومنهجيته، ومقارنة الادعاء بمصادر مستقلة، والبحث عن أدلة مخالفة أو تفسيرات بديلة. بعد ذلك نحدد ما نعرفه وما لا نعرفه، ونصرّح بدرجة الثقة وحدود الاستنتاج.',
+    answerEn: 'Do not accept a conclusion merely because it sounds persuasive. Check the source’s credibility, date, and method; compare the claim with independent sources; and look for contradictory evidence or alternative explanations. Then state what is known, what remains uncertain, and the limits of the conclusion.',
   },
   {
     id: 'agency',
@@ -65,6 +69,8 @@ const challenges = [
     ],
     reflection: 'حوّل إجابة مباشرة إلى ثلاثة أسئلة متدرجة تقود المتعلم نحو الحل.',
     reflectionEn: 'Turn a direct answer into three graduated questions that guide the learner toward a solution.',
+    answer: 'ابدأ بتشخيص موضع التعثر، ثم قدّم أقل تلميح ممكن: سؤالاً يلفت الانتباه إلى المعطى أو الخطوة التالية دون إعطاء الحل. امنح المتعلم وقتاً للمحاولة، ثم زد الدعم تدريجياً عند الحاجة. وعندما يبدأ بالنجاح، اسحب التلميحات واطلب منه تفسير خطواته؛ فالغاية بناء الاستقلالية لا إنجاز المهمة نيابة عنه.',
+    answerEn: 'First diagnose where the learner is stuck, then offer the smallest useful hint: a question that directs attention to a clue or next step without giving away the solution. Allow time to try, increase support gradually if needed, and withdraw hints as the learner makes progress. Ask them to explain their steps; the goal is independence, not doing the task for them.',
   },
 ];
 
@@ -74,13 +80,25 @@ export const ThinkChallenge: React.FC<ThinkChallengeProps> = ({ lang, isOpen, on
   const [hintLevel, setHintLevel] = useState(0);
   const [response, setResponse] = useState('');
   const [showReflection, setShowReflection] = useState(false);
+  const [evaluated, setEvaluated] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const challenge = challenges[index];
 
   const reset = () => {
     setHintLevel(0);
     setResponse('');
     setShowReflection(false);
+    setEvaluated(false);
+    setShowAnswer(false);
   };
+  const evaluateResponse = () => setEvaluated(true);
+  const hasReasoning = /(لأن|لذلك|مثال|دليل|أثبت|أشرح|أقارن|مصدر|تطبيق|مستقل|because|evidence|example|reason|explain|compare|apply|independent|source)/i.test(response);
+  const feedback = response.trim().length < 25
+    ? (isAr ? 'بداية جيدة، لكن إجابتك ما زالت مقتضبة. أضف سبباً يفسّر موقفك، ومثالاً أو دليلاً يدعمه.' : 'A useful start, but your response is still brief. Add a reason for your position and an example or evidence to support it.')
+    : hasReasoning
+      ? (isAr ? 'أحسنت؛ إجابتك تتضمن مؤشراً على التعليل أو الاستناد إلى دليل. طوّرها أكثر بذكر مثال محدد، وفكّر في حالة قد لا يصح فيها استنتاجك.' : 'Good work: your response shows an attempt to reason or use evidence. Strengthen it with a specific example, and consider a case where your conclusion might not hold.')
+      : (isAr ? 'قدّمت موقفاً واضحاً. الخطوة التالية هي توضيح لماذا اخترته: ما الدليل؟ وما المثال الذي يختبر فكرتك؟' : 'You have stated a clear position. Now explain why: what evidence supports it, and what example could test your idea?');
+
   const changeChallenge = (next: number) => {
     setIndex((next + challenges.length) % challenges.length);
     reset();
@@ -128,6 +146,21 @@ export const ThinkChallenge: React.FC<ThinkChallengeProps> = ({ lang, isOpen, on
             <span className="text-xs text-white/35">{isAr ? 'إجابتك تبقى في هذه الجلسة ولا تُرسل إلى خادم.' : 'Your response stays in this session and is not sent to a server.'}</span>
           </div>
           {showReflection && <div className="mt-3 rounded-xl border border-amber-200/15 bg-amber-200/[0.05] p-4"><p className="mb-1 text-[10px] font-bold tracking-wider text-amber-200/75">{isAr ? 'انقل التفكير إلى الممارسة' : 'APPLY YOUR THINKING'}</p><p className="text-sm leading-7 text-white/85">{isAr ? challenge.reflection : challenge.reflectionEn}</p></div>}
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            <button onClick={evaluateResponse} disabled={!response.trim()} className="rounded-full bg-cyan-200 px-5 py-2.5 text-sm font-bold text-[#071522] transition hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-40">{isAr ? 'قيّم إجابتي' : 'Evaluate my response'}</button>
+            {evaluated && <button onClick={() => setShowAnswer((v) => !v)} className="rounded-full border border-amber-200/35 px-5 py-2.5 text-sm font-semibold text-amber-100 transition hover:bg-amber-200/10">{isAr ? (showAnswer ? 'إخفاء الإجابة المقترحة' : 'افصح عن الإجابة') : (showAnswer ? 'Hide suggested answer' : 'Reveal a suggested answer')}</button>}
+          </div>
+          {evaluated && <div className="mt-4 rounded-2xl border border-cyan-200/20 bg-cyan-200/[0.06] p-4" role="status" aria-live="polite">
+            <p className="mb-2 text-xs font-bold tracking-wide text-cyan-200">{isAr ? 'تغذية راجعة أولية' : 'FORMATIVE FEEDBACK'}</p>
+            <p className="text-sm leading-7 text-white/90">{feedback}</p>
+            <p className="mt-2 text-[11px] text-white/40">{isAr ? 'هذه مراجعة إرشادية محلية تعتمد على مؤشرات صياغية، وليست حكماً آلياً على جودة تفكيرك.' : 'This is local guidance based on writing cues, not an automated judgment of the quality of your thinking.'}</p>
+          </div>}
+          {evaluated && showAnswer && <div className="mt-3 rounded-2xl border border-amber-200/20 bg-amber-200/[0.06] p-4">
+            <p className="mb-2 text-xs font-bold tracking-wide text-amber-200">{isAr ? 'إجابة مقترحة للمقارنة والتأمل' : 'SUGGESTED ANSWER FOR COMPARISON'}</p>
+            <p className="text-sm leading-7 text-white/90">{isAr ? challenge.answer : challenge.answerEn}</p>
+            <p className="mt-3 text-xs text-amber-100/65">{isAr ? 'قارن بين إجابتك وهذه الإجابة: ما الفكرة التي أصبت فيها؟ وما الذي يمكنك إضافته أو مراجعته؟' : 'Compare your response with this one: what did you get right, and what could you add or reconsider?'}</p>
+          </div>}
         </div>
 
         <footer className="flex items-center justify-between border-t border-white/10 bg-black/10 px-5 py-4 sm:px-7">
