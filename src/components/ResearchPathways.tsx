@@ -73,11 +73,11 @@ export const ResearchPathways: React.FC<ResearchPathwaysProps> = ({ lang }) => {
   const isAr = lang === 'ar';
 
   return (
-    <section id="research-pathways" className="py-16 md:py-24 border-b border-white/8 bg-[#0b101a]/30">
+    <section id="research-pathways" className="py-16 md:py-24 border-b border-white/8 bg-[var(--logos-navy-deep)]/35">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-3xl mb-10 md:mb-14">
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-white/45 mb-3">
-            <span className="text-blue-400">00 // Explore the platform</span>
+            <span className="text-[var(--logos-cyan)]">00 // Explore the platform</span>
             <span aria-hidden="true">·</span>
             <span>{isAr ? 'مسارات الاستكشاف' : 'Research-led pathways'}</span>
           </div>
@@ -98,10 +98,10 @@ export const ResearchPathways: React.FC<ResearchPathwaysProps> = ({ lang }) => {
               <a
                 key={item.id}
                 href={`#${item.target}`}
-                className="group min-h-[220px] flex flex-col p-5 md:p-6 rounded-2xl border border-white/10 bg-[#111827]/58 hover:bg-[#1b2638]/78 hover:border-blue-400/35 transition-all duration-300"
+                className="group logos-spotlight-card min-h-[220px] flex flex-col p-5 md:p-6 rounded-2xl border transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-7">
-                  <div className="w-10 h-10 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center text-blue-300">
+                  <div className="w-10 h-10 rounded-xl border border-[var(--logos-border)] bg-white/[0.04] flex items-center justify-center text-[var(--logos-cyan)]">
                     <Icon className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <span className="font-mono text-xs tracking-widest text-white/30">{item.number}</span>
@@ -112,7 +112,7 @@ export const ResearchPathways: React.FC<ResearchPathwaysProps> = ({ lang }) => {
                 <p className="mt-2 text-sm leading-relaxed text-white/55 flex-1">
                   {isAr ? item.descriptionAr : item.description}
                 </p>
-                <div className="mt-5 flex items-center gap-2 text-xs font-medium text-blue-300 group-hover:text-blue-200">
+                <div className="mt-5 flex items-center gap-2 text-xs font-medium text-[var(--logos-cyan)] group-hover:text-[var(--logos-ivory)]">
                   <span>{isAr ? item.actionAr : item.action}</span>
                   <ArrowUpRight className={`w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 ${isAr ? 'rotate-[-90deg] group-hover:-translate-y-0.5' : ''}`} />
                 </div>

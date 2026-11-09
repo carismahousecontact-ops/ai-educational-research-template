@@ -1,76 +1,176 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  --color-void: #08090b;
-  --color-surface: #0e1015;
-  --color-panel: #141720;
-  --color-panel-border: rgba(255, 255, 255, 0.08);
-}
+/* LOGOS institutional design tokens */
+:root {
+  color-scheme: dark;
+  --logos-navy: #142D4B;
+  --logos-navy-deep: #0D2036;
+  --logos-navy-surface: #1A3859;
+  --logos-gold: #B58A4C;
+  --logos-cyan: #27A6D2;
+  --logos-ivory: #F5EEE6;
+  --logos-sand: #D5C1AA;
+  --logos-stone: #C3B29F;
+  --logos-border: rgba(197, 178, 159, .18);
+  --logos-muted: rgba(245, 238, 230, .72);
+  --logos-shadow: 0 24px 70px rgba(3, 13, 25, .34);
 
-body {
-  font-family: var(--font-sans);
-  background-color: #08090b;
-  color: #f0f2f7;
+  /* Editorial typography: clear Arabic reading face, robust weights only. */
+  --logos-font-ar: "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+  --logos-font-latin: "Inter", system-ui, -apple-system, sans-serif;
+  --logos-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --logos-text-primary: #F5EEE6;
+  --logos-text-secondary: #D5C1AA;
+  --logos-text-muted: #B9C5D2;
+  --logos-text-link: #55BCE0;
+  --logos-text-accent: #D9B982;
 }
+@theme {
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: var(--logos-font-mono);
+  --font-weight-thin: 400;
+  --font-weight-extralight: 400;
+  --font-weight-light: 400;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --text-xs: .875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.25rem;
+  --text-6xl: 4rem;
+  --text-7xl: 4.5rem;
+  --color-void: var(--logos-navy-deep);
+  --color-surface: var(--logos-navy);
+  --color-panel: var(--logos-navy-surface);
+  --color-panel-border: var(--logos-border);
+}
+html { scroll-behavior: smooth; font-synthesis: none; text-rendering: optimizeLegibility; }
+body {
+  font-family: var(--logos-font-latin);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
+  background-color: var(--logos-navy);
+  color: var(--logos-text-primary);
+}
+html[lang="ar"] body {
+  font-family: var(--logos-font-ar);
+  font-size: 18px;
+  line-height: 1.95;
+}
+html[lang="ar"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
+  font-family: var(--logos-font-ar);
+  letter-spacing: 0;
+  font-weight: 700;
+}
+html[lang="en"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
+  font-family: var(--logos-font-latin);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+:where(p, li) { text-wrap: pretty; }
+:where(a, button, input, textarea, select) { font: inherit; }
+::selection { background: rgba(39, 166, 210, .28); color: var(--logos-ivory); }
+
+/* Normalize any legacy light-weight utility to readable regular weight. */
+:where(.font-thin, .font-extralight, .font-light) { font-weight: 400 !important; }
+
+/* Reusable semantic typography roles for future sections and content modules. */
+.logos-text-primary { color: var(--logos-text-primary); }
+.logos-text-secondary { color: var(--logos-text-secondary); }
+.logos-text-muted { color: var(--logos-text-muted); }
+.logos-text-link { color: var(--logos-text-link); }
+.logos-text-accent { color: var(--logos-text-accent); }
+.logos-reading-copy { max-width: 68ch; font-size: 1.125rem; line-height: 1.85; }
+html[lang="ar"] .logos-reading-copy { max-width: 58ch; font-size: 1.125rem; line-height: 2; }
+.logos-eyebrow { font-size: .875rem; font-weight: 600; letter-spacing: .12em; }
+html[lang="ar"] .logos-eyebrow { letter-spacing: 0; font-size: .9375rem; }
+.logos-caption { font-size: .875rem; font-weight: 500; line-height: 1.65; color: var(--logos-text-muted); }
 
 .logos-hero {
   background:
-    radial-gradient(ellipse at 78% 42%, rgba(35, 116, 151, 0.15), transparent 42%),
-    radial-gradient(ellipse at 18% 0%, rgba(194, 151, 69, 0.12), transparent 45%),
-    linear-gradient(180deg, rgba(7, 17, 29, 0.96), rgba(8, 13, 22, 0.78));
+    radial-gradient(ellipse at 78% 42%, rgba(39, 166, 210, .13), transparent 42%),
+    radial-gradient(ellipse at 18% 0%, rgba(181, 138, 76, .13), transparent 45%),
+    linear-gradient(180deg, rgba(20, 45, 75, .78), rgba(13, 32, 54, .58));
 }
 .logos-hero-grid {
-  background-image: linear-gradient(rgba(205, 178, 119, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(205, 178, 119, 0.045) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(213, 193, 170, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(213, 193, 170, .045) 1px, transparent 1px);
   background-size: 54px 54px;
   mask-image: linear-gradient(to bottom, black, transparent 88%);
 }
 .logos-gold-text {
-  color: #f0d79e;
-  background: linear-gradient(110deg, #f6e4b8 5%, #d5ad60 52%, #8fd8f3 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #E5C99F;
+  background: linear-gradient(110deg, #F5EEE6 5%, #B58A4C 56%, #70C9E8 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.logos-emblem-card {
+  background: linear-gradient(145deg, rgba(26, 56, 89, .94), rgba(13, 32, 54, .96) 72%);
+  border-color: rgba(181, 138, 76, .32); box-shadow: var(--logos-shadow);
 }
 .logos-emblem-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(135deg, rgba(232, 199, 130, 0.12), transparent 35%, transparent 68%, rgba(105, 202, 240, 0.09));
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(135deg, rgba(181, 138, 76, .11), transparent 38%, transparent 68%, rgba(39, 166, 210, .09));
 }
-.logos-emblem-orbit {
-  position: relative;
-  isolation: isolate;
+.logos-emblem-orbit { position: relative; isolation: isolate; }
+.logos-emblem-orbit::before, .logos-emblem-orbit::after {
+  content: ''; position: absolute; inset: 8%; border: 1px solid rgba(181, 138, 76, .2);
+  border-radius: 50%; pointer-events: none;
 }
-.logos-emblem-orbit::before,
-.logos-emblem-orbit::after {
-  content: '';
-  position: absolute;
-  inset: 8%;
-  border: 1px solid rgba(221, 190, 124, 0.17);
-  border-radius: 50%;
-  pointer-events: none;
+.logos-emblem-orbit::after { inset: 17%; border-color: rgba(39, 166, 210, .18); transform: rotate(32deg) scaleX(1.14); }
+
+/* 21st.dev-inspired spotlight: CSS-only, no second canvas or WebGL layer. */
+.logos-spotlight-card {
+  position: relative; isolation: isolate; overflow: hidden;
+  background-color: rgba(13, 32, 54, .72); border-color: var(--logos-border);
+  transition: border-color .28s ease, background-color .28s ease, transform .28s ease, box-shadow .28s ease;
 }
-.logos-emblem-orbit::after {
-  inset: 17%;
-  border-color: rgba(117, 213, 255, 0.12);
-  transform: rotate(32deg) scaleX(1.14);
+.logos-spotlight-card::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(360px circle at 50% 35%, rgba(39, 166, 210, .16), transparent 70%);
+  transition: opacity .28s ease;
+}
+.logos-spotlight-card:hover {
+  border-color: rgba(39, 166, 210, .42); background-color: rgba(26, 56, 89, .82);
+  box-shadow: 0 18px 46px rgba(3, 13, 25, .25); transform: translateY(-2px);
+}
+.logos-spotlight-card:hover::before { opacity: 1; }
+.logos-spotlight-card:focus-visible { outline: 2px solid var(--logos-cyan); outline-offset: 3px; }
+.logos-section-surface { background: rgba(13, 32, 54, .28); }
+.logos-accent-line { border-color: rgba(181, 138, 76, .22); }
+.logos-cyan { color: var(--logos-cyan); }
+.logos-gold { color: #D9B982; }
+
+/* Editorial Arabic display scale: generous leading and no letter-spacing. */
+html[lang="ar"] .logos-hero h1 { font-size: clamp(2.5rem, 5vw, 4.375rem); line-height: 1.35; }
+html[lang="ar"] .logos-hero p { font-size: 1.125rem; line-height: 2; }
+html[lang="en"] .logos-hero h1 { font-size: clamp(2.75rem, 5vw, 4.5rem); line-height: 1.12; }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  html[lang="ar"] body { font-size: 17.5px; }
+  .logos-reading-copy { font-size: 1.0625rem; }
+  html[lang="ar"] .logos-reading-copy { font-size: 1.0625rem; }
+  .logos-caption { font-size: .875rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .logos-emblem-orbit img { animation: logos-breathe 8s ease-in-out infinite; }
-  @keyframes logos-breathe {
-    0%, 100% { transform: scale(0.98); }
-    50% { transform: scale(1.025); }
-  }
+  @keyframes logos-breathe { 0%, 100% { transform: scale(.98); } 50% { transform: scale(1.025); } }
 }
-
-/* Custom dark scrollbar */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #08090b; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
+::-webkit-scrollbar-track { background: var(--logos-navy-deep); }
+::-webkit-scrollbar-thumb { background: rgba(213, 193, 170, .24); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(213, 193, 170, .4); }

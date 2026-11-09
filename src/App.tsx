@@ -40,7 +40,7 @@ export default function App() {
     <div
       id="top"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
-      className="min-h-screen bg-[#08090b] text-[#f0f2f7] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
+      className="min-h-screen bg-[var(--logos-navy)] text-[var(--logos-ivory)] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
     >
       <ParticleBackground />
       <div className="relative z-10 flex flex-col min-h-screen">
