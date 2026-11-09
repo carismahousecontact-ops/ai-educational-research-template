@@ -1,0 +1,19 @@
+/* LOGOS — working digital brand tokens
+ * Values are visually derived from the supplied identity mockup.
+ * Validate against /public/logos-mark.svg before treating as final print specifications.
+ */
+:root {
+  --logos-navy: #142D4B;
+  --logos-gold: #B58A4C;
+  --logos-cyan: #27A6D2;
+  --logos-ivory: #F5EEE6;
+  --logos-sand: #D5C1AA;
+  --logos-stone: #C3B29F;
+
+  --logos-color-primary: var(--logos-navy);
+  --logos-color-accent: var(--logos-gold);
+  --logos-color-interactive: var(--logos-cyan);
+  --logos-color-surface-light: var(--logos-ivory);
+  --logos-color-surface-secondary: var(--logos-sand);
+  --logos-color-neutral: var(--logos-stone);
+}
