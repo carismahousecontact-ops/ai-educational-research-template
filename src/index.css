@@ -5,7 +5,6 @@
   --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-
   --color-void: #08090b;
   --color-surface: #0e1015;
   --color-panel: #141720;
@@ -18,40 +17,60 @@ body {
   color: #f0f2f7;
 }
 
-/* Antigravity Chromatic Iridescent Glow */
-.gravity-glow {
-  background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.08), rgba(236, 72, 153, 0.05), transparent 70%);
+.logos-hero {
+  background:
+    radial-gradient(ellipse at 78% 42%, rgba(35, 116, 151, 0.15), transparent 42%),
+    radial-gradient(ellipse at 18% 0%, rgba(194, 151, 69, 0.12), transparent 45%),
+    linear-gradient(180deg, rgba(7, 17, 29, 0.96), rgba(8, 13, 22, 0.78));
 }
-
-.chromatic-border {
-  position: relative;
+.logos-hero-grid {
+  background-image: linear-gradient(rgba(205, 178, 119, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(205, 178, 119, 0.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
 }
-.chromatic-border::before {
+.logos-gold-text {
+  color: #f0d79e;
+  background: linear-gradient(110deg, #f6e4b8 5%, #d5ad60 52%, #8fd8f3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.logos-emblem-card::before {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(66, 133, 244, 0.4), rgba(219, 68, 55, 0.2), rgba(244, 180, 0, 0.2), rgba(15, 157, 88, 0.3));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
   pointer-events: none;
+  background: linear-gradient(135deg, rgba(232, 199, 130, 0.12), transparent 35%, transparent 68%, rgba(105, 202, 240, 0.09));
+}
+.logos-emblem-orbit {
+  position: relative;
+  isolation: isolate;
+}
+.logos-emblem-orbit::before,
+.logos-emblem-orbit::after {
+  content: '';
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgba(221, 190, 124, 0.17);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.logos-emblem-orbit::after {
+  inset: 17%;
+  border-color: rgba(117, 213, 255, 0.12);
+  transform: rotate(32deg) scaleX(1.14);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .logos-emblem-orbit img { animation: logos-breathe 8s ease-in-out infinite; }
+  @keyframes logos-breathe {
+    0%, 100% { transform: scale(0.98); }
+    50% { transform: scale(1.025); }
+  }
 }
 
 /* Custom dark scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #08090b;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.24);
-}
-\n
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #08090b; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.24); }
