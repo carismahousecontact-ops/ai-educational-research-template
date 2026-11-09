@@ -54,16 +54,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.24);
 }
-
-
-/* Unified Sonar Grid visual system */
-.sonar-grid-surface {
-  background-color: #08090b;
-  background-image:
-    linear-gradient(rgba(111, 157, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(111, 157, 255, 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .sonar-grid-motion { animation: none !important; transition: none !important; }
-}
+\n
