@@ -11,7 +11,7 @@ export const InvitedTalksTerminal: React.FC<TalksProps> = ({ lang }) => {
   const isAr = lang === 'ar';
 
   return (
-    <section id="talks" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]/82">
+    <section id="talks" className="py-20 md:py-28 border-b border-white/8 bg-[#0b1018]/34">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Header */}
         <div className="max-w-3xl mb-12">
@@ -31,11 +31,11 @@ export const InvitedTalksTerminal: React.FC<TalksProps> = ({ lang }) => {
         </div>
 
         {/* Antigravity Dispatch Table / Card Grid */}
-        <div className="rounded-[2rem] border border-white/10 bg-[#0e1017] divide-y divide-white/8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="rounded-[2rem] border border-white/10 bg-[#111827]/62 divide-y divide-white/8 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           {invitedTalks.map((talk) => (
             <div
               key={talk.id}
-              className="p-6 sm:p-8 hover:bg-[#121520] transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
+              className="p-6 sm:p-8 hover:bg-[#1b2638]/78 transition-colors flex flex-col md:flex-row md:items-center justify-between gap-6"
             >
               <div className="space-y-2 max-w-3xl">
                 <div className="flex items-center gap-3">
