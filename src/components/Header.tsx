@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isAr = lang === 'ar';
 
   return (
-    <header className="sticky top-0 z-50 bg-[#08090b]/82/85 backdrop-blur-xl border-b border-white/8 transition-colors">
+    <header className="sticky top-0 z-50 bg-[#08090b]/85 backdrop-blur-xl border-b border-white/8 transition-colors">
       <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between gap-8">
         {/* Zone 1: Platform Brand Wordmark (Google Antigravity Style) */}
         <a
