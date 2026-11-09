@@ -11,7 +11,7 @@ export const InvitedTalksTerminal: React.FC<TalksProps> = ({ lang }) => {
   const isAr = lang === 'ar';
 
   return (
-    <section id="talks" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]">
+    <section id="talks" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]/82">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Header */}
         <div className="max-w-3xl mb-12">
