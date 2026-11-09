@@ -78,7 +78,14 @@ export const WisdomOperations: React.FC<WisdomOperationsProps> = ({ lang }) => {
               ['المبدأ التربوي','استقلال المتعلم: لا تسلّم الحل قبل أن يبذل محاولة.'],
               ['القيد البرمجي','تدرّج التلميحات، واطلب تفسير المحاولة، وامنع إظهار الناتج النهائي.'],
               ['اختبار القبول','قدّم سؤالاً له حل معروف؛ تحقق أن النظام يوجّه ولا يكشف الحل، ثم سجّل مستوى التلميح.'],
-            ].map((cell, i) => <div key={cell[0]} className="p-5 rounded-xl border border-cyan-300/15 bg-[#0d1a29]/65"><span className="text-xs text-cyan-300">{i + 1} / {cell[0]}</span><p className="mt-3 text-sm leading-7 text-white/75">{cell[1]}</p></div>)}
+            ].map((cell, i) => {
+              const targetId = [1, 3, 5][i];
+              return <button key={cell[0]} onClick={() => { const target = articles.find(a => a.id === targetId); if (target) { setActiveSection(target.section); setExpanded(targetId); } }} className="text-start p-5 rounded-xl border border-cyan-300/15 bg-[#0d1a29]/65 hover:bg-cyan-300/[0.08] hover:border-cyan-300/35 transition-colors">
+                <span className="text-xs text-cyan-300">{i + 1} / {cell[0]}</span>
+                <p className="mt-3 text-sm leading-7 text-white/75">{cell[1]}</p>
+                <span className="mt-4 inline-flex items-center gap-2 text-xs text-cyan-200">افتح المقال #{targetId} <ArrowUpLeft className="w-3.5 h-3.5" /></span>
+              </button>;
+            })}
           </div>
         )}
 
