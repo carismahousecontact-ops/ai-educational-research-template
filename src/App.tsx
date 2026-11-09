@@ -37,6 +37,7 @@ export default function App() {
 
   return (
     <div
+      id="top"
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-[#08090b] text-[#f0f2f7] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
     >
