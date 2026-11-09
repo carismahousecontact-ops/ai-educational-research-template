@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onOpenZeroG }) => {
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-blue-500 via-rose-500 to-amber-400 p-[1px]">
-                <div className="w-full h-full rounded-full bg-[#08090b]/82" />
+                <div className="w-full h-full rounded-full bg-[#08090b]" />
               </div>
               <span className="font-display text-lg font-bold text-white">
                 Antigravity
