@@ -73,7 +73,7 @@ export const ResearchPathways: React.FC<ResearchPathwaysProps> = ({ lang }) => {
   const isAr = lang === 'ar';
 
   return (
-    <section id="research-pathways" className="py-16 md:py-24 border-b border-white/8 bg-[#08090b]/55">
+    <section id="research-pathways" className="py-16 md:py-24 border-b border-white/8 bg-[#0b101a]/30">
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-3xl mb-10 md:mb-14">
           <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.16em] text-white/45 mb-3">
@@ -98,7 +98,7 @@ export const ResearchPathways: React.FC<ResearchPathwaysProps> = ({ lang }) => {
               <a
                 key={item.id}
                 href={`#${item.target}`}
-                className="group min-h-[220px] flex flex-col p-5 md:p-6 rounded-2xl border border-white/10 bg-[#10131a]/75 hover:bg-[#151a25]/90 hover:border-blue-400/35 transition-all duration-300"
+                className="group min-h-[220px] flex flex-col p-5 md:p-6 rounded-2xl border border-white/10 bg-[#111827]/58 hover:bg-[#1b2638]/78 hover:border-blue-400/35 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-7">
                   <div className="w-10 h-10 rounded-xl border border-white/10 bg-white/[0.04] flex items-center justify-center text-blue-300">
