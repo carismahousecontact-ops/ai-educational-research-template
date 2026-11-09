@@ -18,7 +18,6 @@
 - خلفية جزيئات تفاعلية بـ Three.js
 - قسم **Learning Agent Cockpit** لتجربة مهارات الوكلاء التعليمية
 - مصفوفة مشاريع وأنظمة (Projects Matrix)
-- خريطة رحلة العمل الميداني (Journey Radar)
 - قسم المحاضرات المدعوة والكتابات البحثية
 - بيانات وهمية منظمة (mock data) جاهزة للتخصيص
 - تكامل جاهز مع Gemini API
@@ -91,7 +90,6 @@ src/
 │   ├── Hero.tsx
 │   ├── LearningAgentCockpit.tsx
 │   ├── ProjectsMatrix.tsx
-│   ├── JourneyRadar.tsx
 │   ├── InvitedTalksTerminal.tsx
 │   ├── WritingReader.tsx
 │   ├── Footer.tsx
