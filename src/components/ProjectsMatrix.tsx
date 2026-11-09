@@ -18,7 +18,7 @@ export const ProjectsMatrix: React.FC<ProjectsProps> = ({ lang }) => {
       : garethProjects.filter((p) => p.category === filter);
 
   return (
-    <section id="projects" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]">
+    <section id="projects" className="py-20 md:py-28 border-b border-white/8 bg-[#08090b]/82">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
