@@ -13,21 +13,64 @@
   --logos-sand: #D5C1AA;
   --logos-stone: #C3B29F;
   --logos-border: rgba(197, 178, 159, .18);
-  --logos-muted: rgba(245, 238, 230, .68);
+  --logos-muted: rgba(245, 238, 230, .72);
   --logos-shadow: 0 24px 70px rgba(3, 13, 25, .34);
+
+  /* Typographic system: language-aware families and semantic color roles */
+  --logos-font-ar: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
+  --logos-font-latin: "Inter", system-ui, -apple-system, sans-serif;
+  --logos-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --logos-text-primary: #F5EEE6;
+  --logos-text-secondary: #D5C1AA;
+  --logos-text-muted: #B9C5D2;
+  --logos-text-link: #55BCE0;
+  --logos-text-accent: #D9B982;
 }
 @theme {
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: var(--logos-font-mono);
   --color-void: var(--logos-navy-deep);
   --color-surface: var(--logos-navy);
   --color-panel: var(--logos-navy-surface);
   --color-panel-border: var(--logos-border);
 }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-sans); background-color: var(--logos-navy); color: var(--logos-ivory); }
+html { scroll-behavior: smooth; font-synthesis: none; text-rendering: optimizeLegibility; }
+body {
+  font-family: var(--logos-font-latin);
+  font-size: 16px;
+  line-height: 1.7;
+  background-color: var(--logos-navy);
+  color: var(--logos-text-primary);
+}
+html[lang="ar"] body {
+  font-family: var(--logos-font-ar);
+  font-size: 16.5px;
+  line-height: 1.9;
+}
+html[lang="ar"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
+  font-family: var(--logos-font-ar);
+  letter-spacing: 0;
+}
+html[lang="en"] :is(h1,h2,h3,h4,h5,h6,.font-display) {
+  font-family: var(--logos-font-latin);
+  letter-spacing: -0.025em;
+}
+:where(p, li) { text-wrap: pretty; }
+:where(a, button, input, textarea, select) { font: inherit; }
 ::selection { background: rgba(39, 166, 210, .28); color: var(--logos-ivory); }
+
+/* Reusable semantic typography roles for future sections and content modules. */
+.logos-text-primary { color: var(--logos-text-primary); }
+.logos-text-secondary { color: var(--logos-text-secondary); }
+.logos-text-muted { color: var(--logos-text-muted); }
+.logos-text-link { color: var(--logos-text-link); }
+.logos-text-accent { color: var(--logos-text-accent); }
+.logos-reading-copy { max-width: 72ch; font-size: 1rem; line-height: 1.85; }
+html[lang="ar"] .logos-reading-copy { max-width: 58ch; line-height: 1.95; }
+.logos-eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .12em; }
+html[lang="ar"] .logos-eyebrow { letter-spacing: 0; font-size: .8125rem; }
+.logos-caption { font-size: .8125rem; line-height: 1.6; color: var(--logos-text-muted); }
 
 .logos-hero {
   background:
@@ -82,6 +125,16 @@ body { font-family: var(--font-sans); background-color: var(--logos-navy); color
 .logos-cyan { color: var(--logos-cyan); }
 .logos-gold { color: #D9B982; }
 
+/* Arabic display scale: slightly more leading, no Latin-style tracking. */
+html[lang="ar"] .logos-hero h1 { line-height: 1.28; }
+html[lang="ar"] .logos-hero p { line-height: 1.95; }
+html[lang="en"] .logos-hero h1 { line-height: 1.12; }
+
+@media (max-width: 640px) {
+  body { font-size: 15.5px; }
+  html[lang="ar"] body { font-size: 16px; }
+  .logos-reading-copy { font-size: .96875rem; }
+}
 @media (prefers-reduced-motion: no-preference) {
   .logos-emblem-orbit img { animation: logos-breathe 8s ease-in-out infinite; }
   @keyframes logos-breathe { 0%, 100% { transform: scale(.98); } 50% { transform: scale(1.025); } }
