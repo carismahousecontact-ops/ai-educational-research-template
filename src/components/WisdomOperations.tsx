@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { BookOpen, Brain, ShieldCheck, Network, Library, Building2, ChevronDown, ArrowUpLeft, ExternalLink } from 'lucide-react';
 import { Language } from '../types';
 
@@ -48,6 +48,29 @@ export const WisdomOperations: React.FC<WisdomOperationsProps> = ({ lang }) => {
   const [expanded, setExpanded] = useState<number | null>(null);
   const isAr = lang === 'ar';
   const visibleArticles = useMemo(() => activeSection === 'blog' ? articles : articles.filter(a => a.section === activeSection), [activeSection]);
+
+  // Deep links from the footer open the matching article and its parent section.
+  useEffect(() => {
+    const openArticleFromHash = () => {
+      const match = window.location.hash.match(/^#wisdom-article-(\\d+)$/);
+      if (!match) return;
+      const articleId = Number(match[1]);
+      const article = articles.find(item => item.id === articleId);
+      if (!article) return;
+      setActiveSection(article.section);
+      setExpanded(article.id);
+      window.setTimeout(() => {
+        document.getElementById(`wisdom-article-${article.id}`)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 80);
+    };
+
+    openArticleFromHash();
+    window.addEventListener('hashchange', openArticleFromHash);
+    return () => window.removeEventListener('hashchange', openArticleFromHash);
+  }, []);
 
   return (
     <section id="wisdom-operations" dir={isAr ? 'rtl' : 'ltr'} className="relative py-20 md:py-28 border-y border-white/10 bg-[#07101b]/42">
