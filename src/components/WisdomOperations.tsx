@@ -79,7 +79,7 @@ export const WisdomOperations: React.FC<WisdomOperationsProps> = ({ lang }) => {
           <div className="flex items-center gap-2 text-xs font-mono tracking-[0.15em] text-cyan-300/80 mb-4">
             <span>WISDOM OPERATIONS ROOM</span><span className="text-white/30">/</span><span>{isAr ? 'من المبادئ إلى السلوك القابل للفحص' : 'From principles to inspectable behaviour'}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">{isAr ? 'غرفة عمليات الحكمة التربوية' : 'Educational Wisdom Operations Room'}</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">{isAr ? 'عن المنصة' : 'About the platform'}</h2>
           <p className="mt-5 text-base md:text-lg leading-8 text-white/65 max-w-3xl">
             {isAr ? 'منصة بحثية وتطبيقية تدرس كيف تُصمم أنظمة الذكاء الاصطناعي لتدعم التفكير المستقل، وتقدم أسئلة وتلميحات متدرجة بدلاً من تسليم الإجابات الجاهزة. المعلم والمتعلم والحكم الإنساني يظلون في مركز العملية.' : 'A research and applied space for designing AI systems that support independent thinking through questions and graduated hints rather than ready-made answers. Teachers, learners, and human judgement remain central.'}
           </p>
