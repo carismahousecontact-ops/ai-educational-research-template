@@ -98,19 +98,6 @@ export const ZeroGravityPlayground: React.FC<ZeroGravityProps> = ({
       mass: 1.0,
       color: '#f59e0b'
     },
-    {
-      id: 'node-6',
-      name: '27 Countries Fieldwork',
-      nameAr: 'مسار 27 دولة (2003-2026)',
-      category: 'The Journey',
-      categoryAr: 'المسار الميداني',
-      x: 600,
-      y: 220,
-      vx: -0.5,
-      vy: -0.4,
-      mass: 1.15,
-      color: '#6366f1'
-    }
   ];
 
   const [nodes, setNodes] = useState<FloatingNode[]>(initialNodes);
