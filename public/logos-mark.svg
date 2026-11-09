@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="95" y1="320" x2="310" y2="70" gradientUnits="userSpaceOnUse"><stop stop-color="#B98735"/><stop offset=".52" stop-color="#F1D28A"/><stop offset="1" stop-color="#C99A48"/></linearGradient>
+    <linearGradient id="blue" x1="145" y1="300" x2="275" y2="120" gradientUnits="userSpaceOnUse"><stop stop-color="#55B9E8"/><stop offset="1" stop-color="#A4E5FF"/></linearGradient>
+    <filter id="glow" x="40" y="30" width="340" height="360" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <circle cx="210" cy="210" r="166" stroke="#D9B56D" stroke-opacity=".12" stroke-width="1.5"/>
+  <g filter="url(#glow)" opacity=".32" stroke="#D7B56F" stroke-width="12" stroke-linecap="round"><path d="M210 326V235M210 235L145 174M210 235L278 169M145 174L112 111M145 174L170 105M278 169L260 99M278 169L322 119"/></g>
+  <g stroke="url(#gold)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M210 326V235"/>
+    <path d="M210 235L145 174L112 111"/>
+    <path d="M145 174L170 105"/>
+    <path d="M210 235L278 169L260 99"/>
+    <path d="M278 169L322 119"/>
+    <path d="M210 235L210 151"/>
+  </g>
+  <g fill="#0C1725" stroke="url(#gold)" stroke-width="6">
+    <circle cx="210" cy="326" r="10"/><circle cx="145" cy="174" r="10"/><circle cx="112" cy="111" r="9"/>
+    <circle cx="170" cy="105" r="9"/><circle cx="278" cy="169" r="10"/><circle cx="260" cy="99" r="9"/><circle cx="322" cy="119" r="9"/>
+  </g>
+  <path d="M210 235L210 151" stroke="url(#blue)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="210" cy="151" r="12" fill="#75D5FF" stroke="#D8F5FF" stroke-width="4"/>
+  <circle cx="210" cy="235" r="16" fill="#102A40" stroke="#78D9FF" stroke-width="7"/>
+  <circle cx="210" cy="235" r="5" fill="#E7F9FF"/>
+</svg>
