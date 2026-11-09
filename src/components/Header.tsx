@@ -1,21 +1,19 @@
 import React from 'react';
 import { Language } from '../types';
-import { Compass, Terminal, Github } from 'lucide-react';
+import { BrainCircuit, Terminal, Github } from 'lucide-react';
 
 interface HeaderProps {
   lang: Language;
   onToggleLang: () => void;
   onOpenCockpit: () => void;
-  zeroGActive: boolean;
-  onToggleZeroG: () => void;
+  onOpenThinkChallenge: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   lang,
   onToggleLang,
   onOpenCockpit,
-  zeroGActive,
-  onToggleZeroG
+  onOpenThinkChallenge
 }) => {
   const isAr = lang === 'ar';
   const navItems = [
@@ -50,10 +48,10 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         <div className="flex items-center gap-2 shrink-0">
-          <button onClick={onToggleZeroG} title={isAr ? 'تفعيل وضع انعدام الجاذبية' : 'Toggle Zero-G simulation'} aria-pressed={zeroGActive}
-            className={`hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs rounded-full transition-all border ${zeroGActive ? 'bg-sky-400/15 text-sky-200 border-sky-300/50' : 'bg-white/[0.04] text-white/65 border-white/10 hover:border-[#d6b46e]/40 hover:text-white'}`}>
-            <Compass className={`w-3.5 h-3.5 ${zeroGActive ? 'animate-spin' : ''}`} />
-            <span className="hidden 2xl:inline">{isAr ? 'انعدام الجاذبية' : 'Zero-G'}</span>
+          <button onClick={onOpenThinkChallenge} title={isAr ? 'افتح تحدّي التفكير' : 'Open Think Challenge'}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs rounded-full transition-all border bg-white/[0.04] text-white/75 border-white/10 hover:border-[#d6b46e]/40 hover:text-[#f3d99e]">
+            <BrainCircuit className="w-3.5 h-3.5 text-[#8fd8f3]" />
+            <span className="hidden 2xl:inline">{isAr ? 'تحدّي التفكير' : 'Think Challenge'}</span>
           </button>
           <button onClick={onToggleLang} className="px-3 py-2 text-xs text-white/75 hover:text-white bg-white/[0.04] border border-white/10 hover:border-[#d6b46e]/40 rounded-full transition-colors whitespace-nowrap">
             {isAr ? 'EN' : 'العربية'}
