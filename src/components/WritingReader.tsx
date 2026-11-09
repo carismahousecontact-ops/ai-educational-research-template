@@ -12,7 +12,7 @@ export const WritingReader: React.FC<WritingProps> = ({ lang }) => {
   const [selectedEssay, setSelectedEssay] = useState<EssayItem | null>(null);
 
   return (
-    <section id="writing" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e]">
+    <section id="writing" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e]/82">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="max-w-3xl mb-12">

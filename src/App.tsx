@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Language } from './types';
-import { ParticleBackground } from './components/ParticleBackground';
+import { SonarGrid } from './components/SonarGrid';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { LearningAgentCockpit } from './components/LearningAgentCockpit';
@@ -41,8 +41,8 @@ export default function App() {
       dir={lang === 'ar' ? 'rtl' : 'ltr'}
       className="min-h-screen bg-[#08090b] text-[#f0f2f7] flex flex-col font-sans transition-colors selection:bg-blue-600/30 selection:text-white relative"
     >
-      {/* Three.js Interactive Particle Background Canvas */}
-      <ParticleBackground />
+      {/* Unified Sonar Grid visual system shared by every page */}
+      <SonarGrid />
 
       {/* Main UI Overlay (relative z-10) */}
       <div className="relative z-10 flex flex-col min-h-screen">

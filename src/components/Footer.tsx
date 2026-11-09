@@ -11,7 +11,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onOpenZeroG }) => {
   const isAr = lang === 'ar';
 
   return (
-    <footer className="border-t border-white/8 bg-[#060709] py-16 transition-colors relative z-10">
+    <footer className="border-t border-white/8 bg-[#060709]/88 py-16 transition-colors relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/8">
           {/* Column 1: Platform Brand (5 cols) */}

@@ -233,7 +233,7 @@ export const FirebaseSkillsManager: React.FC<FirebaseManagerProps> = ({ lang }) 
   const statusBadge = getStatusBadge();
 
   return (
-    <section id="firebase-registry" className="py-20 md:py-28 border-b border-white/8 bg-[#090b10] relative overflow-hidden">
+    <section id="firebase-registry" className="py-20 md:py-28 border-b border-white/8 bg-[#090b10]/82 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Antigravity Telemetry Status Bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-[#0f121a] border border-white/10 mb-12 text-xs font-mono">

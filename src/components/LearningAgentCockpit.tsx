@@ -24,7 +24,7 @@ export const LearningAgentCockpit: React.FC<CockpitProps> = ({ lang }) => {
   };
 
   return (
-    <section id="cockpit" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e] relative overflow-hidden">
+    <section id="cockpit" className="py-20 md:py-28 border-b border-white/8 bg-[#090b0e]/82 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Antigravity Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
