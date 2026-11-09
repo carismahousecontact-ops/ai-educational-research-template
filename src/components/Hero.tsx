@@ -22,12 +22,12 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="flex flex-wrap items-center gap-3 text-xs font-mono uppercase tracking-[0.16em] text-white/50 mb-8">
           <span className="flex items-center gap-2 text-blue-400">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            <span>ANTIGRAVITY // COGNITIVE RUNTIME</span>
+            <span>ANTIGRAVITY // RESEARCH & LEARNING</span>
           </span>
           <span aria-hidden="true" className="text-white/20">/</span>
-          <span>{isAr ? 'عمارة نظم التعلم المستقلة' : 'Autonomous Learning Systems'}</span>
+          <span>{isAr ? 'البحث وعلوم التعلم والذكاء الاصطناعي' : 'Research · Learning Science · AI'}</span>
           <span aria-hidden="true" className="text-white/20">/</span>
-          <span className="text-white/40">Open Source Protocol</span>
+          <span className="text-white/40">Evidence-informed practice</span>
         </div>
 
         {/* Oversized Antigravity Landing Display */}
@@ -116,12 +116,12 @@ export const Hero: React.FC<HeroProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="text-white font-medium">COGNITIVE KNOWLEDGE ENGINE // V3.1</span>
+                      <span className="text-white font-medium">RESEARCH & LEARNING SYSTEMS</span>
                     </div>
-                    <span className="text-blue-400 tabular-nums">1.2ms LATENCY</span>
+                    <span className="text-blue-400 tabular-nums">EVIDENCE-LED</span>
                   </div>
                   <p className="text-[11px] text-white/50 mt-1 truncate">
-                    {isAr ? 'مصفوفة الكفاءات والاعتماد المعرفي المتبادل' : 'Ontological Graph · Multi-Dimensional Dependency'}
+                    {isAr ? 'بحث تربوي · تصميم تعليمي · تقييم مسؤول' : 'Research · Learning Design · Responsible Evaluation'}
                   </p>
                 </div>
               </div>
