@@ -71,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({
 
               <button
                 onClick={onExploreProjects}
-                className="flex items-center gap-2 px-5 py-3.5 text-sm font-mono uppercase tracking-[0.08em] text-white/80 hover:text-white bg-[#14161f] border border-white/12 hover:border-white/25 rounded-full transition-colors whitespace-nowrap"
+                className="flex items-center gap-2 px-5 py-3.5 text-sm font-mono uppercase tracking-[0.08em] text-white/80 hover:text-white bg-[#182235]/78 border border-white/12 hover:border-white/25 rounded-full transition-colors whitespace-nowrap"
               >
                 <BookOpen className="w-4 h-4 text-purple-400" />
                 <span>{isAr ? 'استكشف المشاريع' : 'Explore projects'}</span>
@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Column 2: Antigravity Console Visual (5 cols) */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-[2rem] border border-white/12 bg-[#0d0f14] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.6)] chromatic-border group overflow-hidden">
+            <div className="relative rounded-[2rem] border border-white/12 bg-[#111827]/62 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.6)] chromatic-border group overflow-hidden">
               <div className="relative aspect-[16/10] rounded-[1.4rem] overflow-hidden bg-black">
                 <img
                   src="/src/assets/images/antigravity_manning_hero_1794169806515.jpg"
